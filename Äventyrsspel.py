@@ -5,13 +5,14 @@ class Player:
         self.name = ""
         self.hp = 100
         self.strength = 10
-        self.xp = 1
+        self.level = 1
+        self.xp = 0
 
 
 class Monster:
     def __init__(self, player1):
-        self.monster_strength = rand.randint(1, 20) + player1.xp
-        self.monster_health = rand.randint(1, 100) + player1.xp
+        self.monster_strength = rand.randint(1, 1) + player1.level
+        self.monster_health = rand.randint(1, 100) + player1.level
         self.monster = rand.choice(["goblin", "zombie", "orc", "pig"])
 
 
@@ -30,7 +31,7 @@ class Trap:
 def display_stats(player1):
     print(f"Health: {int(player1.hp)}")
     print(f"Strength: {int(player1.strength)}")
-    print(f"Level: {player1.xp}")
+    print(f"Level: {player1.level}")
 
 
 class Items:
@@ -91,6 +92,13 @@ def backpack(pack):
     else:
         return pack
 
+def level(player1):
+    if player1.xp < 5:
+        player1.level = 1
+    elif 5 <= player1.xp < 10:
+        player1.level = 2
+    elif 10 <= player1.xp < 15:
+        player1.level = 3
 
 def battle(monster1, player1):
     print(f'You encounterd a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
@@ -103,13 +111,17 @@ def battle(monster1, player1):
         if Action == "1":
             monster1.monster_health -= player1.strength
             print(f"{monster1.monster} Health:{monster1.monster_health} {player1.name} Health:{player1.hp}")
-            if monster1.monster_health <=0:
-                    print(f"You killed the {monster1.monster}")
+            if monster1.monster_health <= 0:
+                player1.xp += 5
+                print(f"You killed the {monster1.monster}\nYou gained 5 experience")
+                level(player1)
+                break
             else:
                 player1.hp -= monster1.monster_strength
         elif Action == "2":
             print("You fled")
             break
+
 
 
 def travel(player1, trap, pack):
