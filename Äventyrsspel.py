@@ -10,7 +10,7 @@ class Player:
 
 class Monster:
     def __init__(self, player1):
-        self.monster_strength = rand.randint(10, 20) + player1.xp
+        self.monster_strength = rand.randint(1, 20) + player1.xp
         self.monster_health = rand.randint(1, 100) + player1.xp
         self.monster = rand.choice(["goblin", "zombie"])
 
