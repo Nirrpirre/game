@@ -1,7 +1,5 @@
 import random as rand
 
-# bing bong
-
 class Player:
     def __init__(self):
         self.name = ""
@@ -135,7 +133,7 @@ def travel(player1, trap, pack):
             trap.trigger(player1)
         else:
             print("You avoided the trap and got away safely")
-
+    return
 
 def menu(player1):
     print("**********Welcome to The Dark Dungeons**********\n")
@@ -149,7 +147,7 @@ def menu(player1):
                         Please enter your choice: """)
         if camp == "1":
             trap = Trap(player1)
-            travel(player1, trap, pack)
+            player1, pack = travel(player1, trap, pack)
         elif camp == "2":
             display_stats(player1)
         elif camp == "3":
