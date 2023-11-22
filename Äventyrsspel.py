@@ -131,6 +131,7 @@ def travel(player1, trap, pack):
         battle(monster1, player1)
     elif departure == 2:
         chestitems = Items()
+        print("You found a chest!")
         if chestitems.name == "longbow" or chestitems.name == "iron sword":
             player1.strength *= (chestitems.strength_bonus + 1)
             print(f"Your strength increased by {round(chestitems.strength_bonus, 1)*100}%")
