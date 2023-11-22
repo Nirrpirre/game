@@ -32,6 +32,7 @@ def display_stats(player1):
     print(f"Health: {int(player1.hp)}")
     print(f"Strength: {int(player1.strength)}")
     print(f"Level: {player1.level}")
+    print(f"Xp: {player1.xp}")
 
 class Items:
     def __init__(self):
