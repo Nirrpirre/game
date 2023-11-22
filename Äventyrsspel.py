@@ -33,7 +33,6 @@ def display_stats(player1):
     print(f"Strength: {int(player1.strength)}")
     print(f"Level: {player1.level}")
 
-
 class Items:
     def __init__(self):
         self.name = rand.choice(["longbow", "iron sword", "iron armor", "iron shield"])
@@ -163,6 +162,7 @@ def menu(player1):
             display_stats(player1)
         elif camp == "3":
             print(backpack(pack))
+        
 
 
 def main():
