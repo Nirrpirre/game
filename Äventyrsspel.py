@@ -10,7 +10,7 @@ class Player:
 
 class Monster:
     def __init__(self, player1):
-        self.monster_strength = rand.randint(1, 10) + player1.xp
+        self.monster_strength = rand.randint(10, 20) + player1.xp
         self.monster_health = rand.randint(1, 100) + player1.xp
         self.monster = rand.choice(["goblin", "zombie"])
 
@@ -133,7 +133,6 @@ def travel(player1, trap, pack):
             trap.trigger(player1)
         else:
             print("You avoided the trap and got away safely")
-    return
 
 def menu(player1):
     print("**********Welcome to The Dark Dungeons**********\n")
@@ -147,7 +146,7 @@ def menu(player1):
                         Please enter your choice: """)
         if camp == "1":
             trap = Trap(player1)
-            player1, pack = travel(player1, trap, pack)
+            travel(player1, trap, pack)
         elif camp == "2":
             display_stats(player1)
         elif camp == "3":
