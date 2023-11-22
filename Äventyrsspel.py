@@ -99,6 +99,20 @@ def level(player1):
         player1.level = 2
     elif 10 <= player1.xp < 15:
         player1.level = 3
+    elif 15 <= player1.xp < 20:
+        player1.level = 4
+    elif 20 <= player1.xp < 25:
+        player1.level = 5
+    elif 25 <= player1.xp < 30:
+        player1.level = 6
+    elif 30 <= player1.xp < 35:
+        player1.level = 7
+    elif 35 <= player1.xp < 40:
+        player1.level = 8
+    elif 40 <= player1.xp < 45:
+        player1.level = 9
+    elif 45 <= player1.xp < 50:
+        player1.level = 10
 
 def battle(monster1, player1):
     print(f'You encounterd a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
