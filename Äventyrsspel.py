@@ -32,7 +32,6 @@ def display_stats(player1):
     print(f"Strength: {int(player1.strength)}")
     print(f"Level: {player1.xp}")
 
-
 class Items:
     def __init__(self):
         self.name = rand.choice(["longbow", "iron sword", "iron armor", "iron shield"])
@@ -40,7 +39,7 @@ class Items:
             self.strength_bonus = rand.uniform(0.1, 0.2)
         else:
             self.hp_bonus = rand.uniform(0.1, 0.2)
-
+            
 def intro(player1):
     print("What is your name, adventurer?: ")
     player1.name = str(input(""))
@@ -151,6 +150,7 @@ def menu(player1):
             display_stats(player1)
         elif camp == "3":
             print(backpack(pack))
+        
 
 
 def main():
