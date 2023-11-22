@@ -39,7 +39,7 @@ class Items:
             self.strength_bonus = rand.uniform(0.1, 0.2)
         else:
             self.hp_bonus = rand.uniform(0.1, 0.2)
-            
+
 def intro(player1):
     print("What is your name, adventurer?: ")
     player1.name = str(input(""))
