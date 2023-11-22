@@ -1,5 +1,6 @@
 import random as rand
 
+# bing bong
 
 class Player:
     def __init__(self):
