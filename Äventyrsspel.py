@@ -41,7 +41,7 @@ class Items:
             self.strength_bonus = rand.uniform(0.1, 0.2)
         else:
             self.hp_bonus = rand.uniform(0.1, 0.2)
-
+                        
 def intro(player1):
     print("What is your name, adventurer?: ")
     player1.name = str(input(""))
@@ -113,9 +113,10 @@ def level(player1):
         player1.level = 9
     elif 45 <= player1.xp < 50:
         player1.level = 10
+    print(f"{player1.name} just leveled up to level: {player1.level}")
 
 def battle(monster1, player1):
-    print(f'You encounterd a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
+    print(f'\nYou encounterd a \n--{monster1.monster}--\nStrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
     while monster1.monster_health > 0 and player1.hp > 0:
         print("""
                 1. Attack
@@ -124,10 +125,10 @@ def battle(monster1, player1):
         Action = input("Attack or Flee ")
         if Action == "1":
             monster1.monster_health -= player1.strength
-            print(f"{monster1.monster} Health:{monster1.monster_health} {player1.name} Health:{player1.hp}")
+            print(f"--{monster1.monster}-- Health:{monster1.monster_health}\n--{player1.name}-- Health:{player1.hp}")
             if monster1.monster_health <= 0:
                 player1.xp += 5
-                print(f"You killed the {monster1.monster}\nYou gained 5 experience")
+                print(f"\nYou killed the {monster1.monster}\nYou gained 5 experience")
                 level(player1)
                 break
             else:
@@ -178,6 +179,8 @@ def menu(player1):
             display_stats(player1)
         elif camp == "3":
             print(backpack(pack))
+    if player1.hp <= 0:
+        print("You Died!")
         
 
 
