@@ -11,7 +11,7 @@ class Player:
 
 class Monster:
     def __init__(self, player1):
-        self.monster_strength = rand.randint(1, 1) + player1.level
+        self.monster_strength = rand.randint(1, 20) + player1.level
         self.monster_health = rand.randint(1, 100) + player1.level
         self.monster = rand.choice(["goblin", "zombie", "orc", "pig"])
 
@@ -108,7 +108,43 @@ def battle(monster1, player1):
             if monster1.monster_health <= 0:
                 player1.xp += 5
                 print(f"You killed the {monster1.monster}\nYou gained 5 experience")
-                break
+                if player1.xp == 20:
+                    player1.level +=1
+                    player1.strength += 2
+                    player1.hp += 20
+                elif player1.xp == 40:
+                    player1.level +=1
+                    player1.strength += 2
+                    player1.hp += 20
+                elif player1.xp == 60:
+                    player1.level +=1
+                    player1.strength += 2
+                    player1.hp += 20
+                elif player1.xp == 80:
+                    player1.level +=1
+                    player1.strength += 2
+                    player1.hp += 20
+                elif player1.xp == 100:
+                    player1.level +=1
+                    player1.strength += 2
+                    player1.hp += 20
+                elif player1.xp == 120:
+                    player1.level +=1
+                    player1.strength += 2
+                    player1.hp += 20
+                elif player1.xp == 140:
+                    player1.level +=1
+                    player1.strength += 2
+                    player1.hp += 20
+                elif player1.xp == 160:
+                    player1.level +=1
+                    player1.strength += 2
+                    player1.hp += 20
+                elif player1.xp == 180:
+                    player1.level +=1
+                    player1.strength += 2
+                    player1.hp += 20
+                    break
     
             else:
                 player1.hp -= monster1.monster_strength
@@ -161,6 +197,8 @@ def menu(player1):
             display_stats(player1)
         elif camp == "3":
             print(backpack(pack))
+    if player1.hp < 0:
+        print("You got died, better luck next time")
         
 
 
