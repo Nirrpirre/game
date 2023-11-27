@@ -7,8 +7,7 @@ class Player:
         self.strength = 10
         self.level = 1
         self.xp = 0
-        self.xp_to_levelup = 50
-        self.level_multiplier = 1.2
+        
 
 class Monster:
     def __init__(self, player1):
@@ -93,15 +92,6 @@ def backpack(pack):
     else:
         return pack
 
-def levelup(player):
-    # Increase player attributes upon leveling up
-    player.strength += 5
-    player.hp += 20
-    print(f"Congratulations, {player.name}! You reached level {player.level}.\n")
-    print(f"Your strength increased to {player.strength}.")
-    print(f"Your health increased to {player.hp}.\n")
-    player.xp_to_levelup = int(player.xp_to_levelup * player.level_multiplier)  # Increase XP required for the next level
-    player.level += 1
 
 def battle(monster1, player1):
     print(f'You encounterd a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
