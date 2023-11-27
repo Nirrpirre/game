@@ -7,7 +7,6 @@ class Player:
         self.strength = 10
         self.level = 1
         self.xp = 0
-# hej
 
 class Monster:
     def __init__(self, player1):
@@ -97,31 +96,31 @@ def level(player1):
         player1.level = 1
     elif 20 <= player1.xp < 40:
         player1.level = 2
-        print(f"You leveled up. You are level{player1.level}")
+        print(f"You leveled up. You are level {player1.level}")
     elif 40 <= player1.xp < 60:
         player1.level = 3
-        print(f"You leveled up. You are level{player1.level}")
+        print(f"You leveled up. You are level {player1.level}")
     elif 60 <= player1.xp < 80:
         player1.level = 4
-        print(f"You leveled up. You are level{player1.level}")
+        print(f"You leveled up. You are level {player1.level}")
     elif 80 <= player1.xp < 100:
         player1.level = 5
-        print(f"You leveled up. You are level{player1.level}")
+        print(f"You leveled up. You are level {player1.level}")
     elif 100 <= player1.xp < 120:
         player1.level = 6
-        print(f"You leveled up. You are level{player1.level}")
+        print(f"You leveled up. You are level {player1.level}")
     elif 120 <= player1.xp < 140:
         player1.level = 7
-        print(f"You leveled up. You are level{player1.level}")
+        print(f"You leveled up. You are level {player1.level}")
     elif 140 <= player1.xp < 160:
         player1.level = 8
-        print(f"You leveled up. You are level{player1.level}")
+        print(f"You leveled up. You are level {player1.level}")
     elif 180 <= player1.xp < 200:
         player1.level = 9
-        print(f"You leveled up. You are level{player1.level}")
+        print(f"You leveled up. You are level {player1.level}")
     elif 200 <= player1.xp < 220:
         player1.level = 10
-        print(f"You leveled up. You are level{player1.level}")
+        print(f"You leveled up. You are level {player1.level}")
 
 def battle(monster1, player1):
     print(f'You encounterd a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
