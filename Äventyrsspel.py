@@ -140,7 +140,7 @@ def battle(monster1, player1):
                 if player1.level == 2:
                     player1.strength += 2
                     player1.hp += 20
-                break
+                    break
             else:
                 player1.hp -= monster1.monster_strength
         elif Action == "2":
