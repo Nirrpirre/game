@@ -135,7 +135,7 @@ def level(player1):
 def levelup(player1):
     if player1.level >= 2:
         player1.strength += 100
-        player1.health += 100
+        player1.hp
 
 def battle(monster1, player1):
     print(f'You encounterd a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
