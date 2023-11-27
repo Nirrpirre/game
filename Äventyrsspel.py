@@ -93,7 +93,6 @@ def backpack(pack):
         return pack
 
 
-
 def battle(monster1, player1):
     print(f'You encounterd a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
     while monster1.monster_health > 0 and player1.hp > 0:
@@ -108,8 +107,18 @@ def battle(monster1, player1):
             if monster1.monster_health <= 0:
                 player1.xp += 5
                 print(f"You killed the {monster1.monster}\nYou gained 5 experience")
-                level(player1)
-                break
+                if player1.xp < 20:
+                    player1.level = 1
+                elif 20 <= player1.xp < 40:
+                     player1.level = 2
+                     player1.strength += 2
+                     player1.hp += 20
+                elif 40 <= player1.xp < 60:
+                    player1.level = 3
+                    player1.strength += 2
+                    player1.hp += 20
+                    break
+                    
             else:
                 player1.hp -= monster1.monster_strength
         elif Action == "2":
