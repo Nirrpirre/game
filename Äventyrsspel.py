@@ -7,6 +7,8 @@ class Player:
         self.strength = 10
         self.level = 1
         self.xp = 0
+        self.xp_to_levelup = 50
+        self.level_multiplier = 1.2
 
 class Monster:
     def __init__(self, player1):
@@ -91,37 +93,15 @@ def backpack(pack):
     else:
         return pack
 
-def level(player1):
-    if player1.xp < 20:
-        player1.level = 1
-    elif 20 <= player1.xp < 40:
-        player1.level = 2
-        print(f"You leveled up. You are level {player1.level}")
-    elif 40 <= player1.xp < 60:
-        player1.level = 3
-        print(f"You leveled up. You are level {player1.level}")
-    elif 60 <= player1.xp < 80:
-        player1.level = 4
-        print(f"You leveled up. You are level {player1.level}")
-    elif 80 <= player1.xp < 100:
-        player1.level = 5
-        print(f"You leveled up. You are level {player1.level}")
-    elif 100 <= player1.xp < 120:
-        player1.level = 6
-        print(f"You leveled up. You are level {player1.level}")
-    elif 120 <= player1.xp < 140:
-        player1.level = 7
-        print(f"You leveled up. You are level {player1.level}")
-    elif 140 <= player1.xp < 160:
-        player1.level = 8
-        print(f"You leveled up. You are level {player1.level}")
-    elif 180 <= player1.xp < 200:
-        player1.level = 9
-        print(f"You leveled up. You are level {player1.level}")
-    elif 200 <= player1.xp < 220:
-        player1.level = 10
-        print(f"You leveled up. You are level {player1.level}")
-
+def levelup(player):
+    # Increase player attributes upon leveling up
+    player.strength += 5
+    player.hp += 20
+    print(f"Congratulations, {player.name}! You reached level {player.level}.\n")
+    print(f"Your strength increased to {player.strength}.")
+    print(f"Your health increased to {player.hp}.\n")
+    player.xp_to_levelup = int(player.xp_to_levelup * player.level_multiplier)  # Increase XP required for the next level
+    player.level += 1
 
 def battle(monster1, player1):
     print(f'You encounterd a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
