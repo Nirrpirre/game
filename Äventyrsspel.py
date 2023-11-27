@@ -169,14 +169,17 @@ def travel(player1, trap, pack):
     elif departure == 2:
         chestitems = Items()
         print("You found a chest!")
-        if chestitems.name == "longbow" or chestitems.name == "iron sword":
-            player1.strength *= (chestitems.strength_bonus + 1)
-            print(f"Your strength increased by {round(chestitems.strength_bonus, 1)*100}%")
+        if len(pack) < 5:  # Check if inventory is not full
+            if chestitems.name == "longbow" or chestitems.name == "iron sword":
+                player1.strength *= (chestitems.strength_bonus + 1)
+                print(f"Your strength increased by {round(chestitems.strength_bonus, 2) * 100}%")
+            else:
+                player1.hp *= (chestitems.hp_bonus + 1)
+                print(f"Your health increased by {round(chestitems.hp_bonus, 2) * 100}%")
+            print(f"You got a new {chestitems.name}")
+            pack.append(chestitems.name)
         else:
-            player1.hp *= (chestitems.hp_bonus + 1)
-            print(f"Your health increased by {round(chestitems.hp_bonus, 1)*100}%")
-        print(f"You got a new {chestitems.name}")
-        pack.append(chestitems.name)
+            print("Your backpack is full. You cannot carry more items.")
     elif departure == 3:
         print("You encountered a trap")
         if rand.random() < 0.5:
