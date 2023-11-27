@@ -169,7 +169,7 @@ def travel(player1, trap, pack):
     elif departure == 2:
         chestitems = Items()
         print("You found a chest!")
-        if len(pack) < 5:  # Check if inventory is not full
+        if len(pack) < 5:
             if chestitems.name == "longbow" or chestitems.name == "iron sword":
                 player1.strength *= (chestitems.strength_bonus + 1)
                 print(f"Your strength increased by {round(chestitems.strength_bonus, 2) * 100}%")
