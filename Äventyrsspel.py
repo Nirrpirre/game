@@ -92,6 +92,20 @@ def backpack(pack):
     else:
         return pack
 
+levelup=False
+
+def level(player1):
+    if player1.xp < 20 and not levelup:
+        player1.level = 1
+    elif 20 <= player1.xp < 40 and not levelup:
+        player1.level = 2
+        player1.strength += 2
+        player1.hp += 20
+    elif 40 <= player1.xp < 60 and not levelup:
+        player1.level = 3
+        player1.strength += 2
+        player1.hp += 20
+        levelup = True
 
 def battle(monster1, player1):
     print(f'You encounterd a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
@@ -107,18 +121,8 @@ def battle(monster1, player1):
             if monster1.monster_health <= 0:
                 player1.xp += 5
                 print(f"You killed the {monster1.monster}\nYou gained 5 experience")
-                if player1.xp < 20:
-                    player1.level = 1
-                elif 20 <= player1.xp < 40:
-                     player1.level = 2
-                     player1.strength += 2
-                     player1.hp += 20
-                elif 40 <= player1.xp < 60:
-                    player1.level = 3
-                    player1.strength += 2
-                    player1.hp += 20
-                    break
-                    
+                break
+    
             else:
                 player1.hp -= monster1.monster_strength
         elif Action == "2":
