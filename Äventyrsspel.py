@@ -7,7 +7,7 @@ class Player:
         self.strength = 10
         self.level = 1
         self.xp = 0
-
+# hej
 
 class Monster:
     def __init__(self, player1):
