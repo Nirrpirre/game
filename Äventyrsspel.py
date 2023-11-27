@@ -121,7 +121,7 @@ def level(player1):
     elif 200 <= player1.xp < 220:
         player1.level = 10
         print(f"You leveled up. You are level {player1.level}")
-# penis tihihi
+
 def battle(monster1, player1):
     print(f'You encounterd a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
     while monster1.monster_health > 0 and player1.hp > 0:
