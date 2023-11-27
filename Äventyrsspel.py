@@ -93,6 +93,7 @@ def backpack(pack):
         return pack
 
 
+
 def battle(monster1, player1):
     print(f'You encounterd a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
     while monster1.monster_health > 0 and player1.hp > 0:
