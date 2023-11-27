@@ -93,26 +93,35 @@ def backpack(pack):
         return pack
 
 def level(player1):
-    if player1.xp < 5:
+    if player1.xp < 20:
         player1.level = 1
-    elif 5 <= player1.xp < 10:
+    elif 20 <= player1.xp < 40:
         player1.level = 2
-    elif 10 <= player1.xp < 15:
+        print(f"You leveled up. You are level{player1.level}")
+    elif 40 <= player1.xp < 60:
         player1.level = 3
-    elif 15 <= player1.xp < 20:
+        print(f"You leveled up. You are level{player1.level}")
+    elif 60 <= player1.xp < 80:
         player1.level = 4
-    elif 20 <= player1.xp < 25:
+        print(f"You leveled up. You are level{player1.level}")
+    elif 80 <= player1.xp < 100:
         player1.level = 5
-    elif 25 <= player1.xp < 30:
+        print(f"You leveled up. You are level{player1.level}")
+    elif 100 <= player1.xp < 120:
         player1.level = 6
-    elif 30 <= player1.xp < 35:
+        print(f"You leveled up. You are level{player1.level}")
+    elif 120 <= player1.xp < 140:
         player1.level = 7
-    elif 35 <= player1.xp < 40:
+        print(f"You leveled up. You are level{player1.level}")
+    elif 140 <= player1.xp < 160:
         player1.level = 8
-    elif 40 <= player1.xp < 45:
+        print(f"You leveled up. You are level{player1.level}")
+    elif 180 <= player1.xp < 200:
         player1.level = 9
-    elif 45 <= player1.xp < 50:
+        print(f"You leveled up. You are level{player1.level}")
+    elif 200 <= player1.xp < 220:
         player1.level = 10
+        print(f"You leveled up. You are level{player1.level}")
 
 def battle(monster1, player1):
     print(f'You encounterd a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
