@@ -94,48 +94,33 @@ def backpack(pack):
 def level(player1):
     if player1.xp < 20:
         player1.level = 1
-        levelup(player1)
     elif 20 <= player1.xp < 40:
         player1.level = 2
-        levelup(player1)
         print(f"You leveled up. You are level {player1.level}")
     elif 40 <= player1.xp < 60:
         player1.level = 3
-        levelup(player1)
         print(f"You leveled up. You are level {player1.level}")
     elif 60 <= player1.xp < 80:
         player1.level = 4
-        levelup(player1)
         print(f"You leveled up. You are level {player1.level}")
     elif 80 <= player1.xp < 100:
         player1.level = 5
-        levelup(player1)
         print(f"You leveled up. You are level {player1.level}")
     elif 100 <= player1.xp < 120:
         player1.level = 6
-        levelup(player1)
         print(f"You leveled up. You are level {player1.level}")
     elif 120 <= player1.xp < 140:
         player1.level = 7
-        levelup(player1)
         print(f"You leveled up. You are level {player1.level}")
     elif 140 <= player1.xp < 160:
         player1.level = 8
-        levelup(player1)
         print(f"You leveled up. You are level {player1.level}")
     elif 180 <= player1.xp < 200:
         player1.level = 9
-        levelup(player1)
         print(f"You leveled up. You are level {player1.level}")
     elif 200 <= player1.xp < 220:
         player1.level = 10
-        levelup(player1)
         print(f"You leveled up. You are level {player1.level}")
-
-def levelup(player1):
-    if player1.level >= 2:
-        player1.strength += 2
-        player1.hp += 20
 
 def battle(monster1, player1):
     print(f'You encounterd a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
@@ -152,6 +137,9 @@ def battle(monster1, player1):
                 player1.xp += 5
                 print(f"You killed the {monster1.monster}\nYou gained 5 experience")
                 level(player1)
+                if player1.level == 2:
+                    player1.strength += 2
+                    player1.hp += 20
                 break
             else:
                 player1.hp -= monster1.monster_strength
@@ -169,7 +157,7 @@ def travel(player1, trap, pack):
     elif departure == 2:
         chestitems = Items()
         print("You found a chest!")
-        if len(pack) < 5:
+        if len(pack) < 5: 
             if chestitems.name == "longbow" or chestitems.name == "iron sword":
                 player1.strength *= (chestitems.strength_bonus + 1)
                 print(f"Your strength increased by {round(chestitems.strength_bonus, 2) * 100}%")
