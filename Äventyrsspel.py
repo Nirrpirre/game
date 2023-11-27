@@ -136,6 +136,30 @@ def levelup(player1):
     if player1.level == 2:
         player1.strength += 2
         player1.hp += 20
+    elif player1.level == 3:
+        player1.strength += 2
+        player1.hp += 20
+    elif player1.level == 4:
+        player1.strength += 2
+        player1.hp += 20
+    elif player1.level == 5:
+        player1.strength += 2
+        player1.hp += 20
+    elif player1.level == 6:
+        player1.strength += 2
+        player1.hp += 20
+    elif player1.level == 7:
+        player1.strength += 2
+        player1.hp += 20
+    elif player1.level == 8:
+        player1.strength += 2
+        player1.hp += 20
+    elif player1.level == 9:
+        player1.strength += 2
+        player1.hp += 20
+    elif player1.level == 10:
+        player1.strength += 2
+        player1.hp += 20
 
 def battle(monster1, player1):
     print(f'You encounterd a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
