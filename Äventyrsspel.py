@@ -17,7 +17,7 @@ class Monster:
 class Trap:
     def __init__(self, player1):
         self.trap_name = rand.choice(["bear", "spike"])
-        self.trap_damage = rand.randint(player1.hp // 6, player1.hp // 4)
+        self.trap_damage = rand.randint(player1.hp // 4, player1.hp // 2)
 
     def trigger(self, player1):
         print(f"You triggered a {self.trap_name} trap!")
@@ -106,7 +106,7 @@ def battle(monster1, player1):
         Action = input("Attack or Flee ")
         if Action == "1":
             monster1.monster_health -= player1.strength
-            print(f"{monster1.monster} Health:{monster1.monster_health} {player1.name} Health:{player1.hp}")
+            print(f"{monster1.monster} Health:{monster1.monster_health} \n {player1.name} Health:{player1.hp}")
             if monster1.monster_health <= 0:
                 player1.xp += 5
                 print(f"You killed the {monster1.monster}\nYou gained 5 experience")
@@ -138,11 +138,16 @@ def travel(player1, trap, pack):
         else:
             print("Your backpack is full. You cannot carry more items.")
     elif departure == 3:
+        rätt_svar = rand.randint(1,3)
         print("You encountered a trap")
-        player_answer = (int.input(""))
-        if player_answer == rand.random(1,3):
+        print ('Guess a number between 1 and 4 to have a chance to escape!')
+        while True:
+            player_answer = int(input(""))
+            if player_answer == 1 or player_answer == 2 or player_answer == 3 or player_answer == 4:
+                break
+        if player_answer == (rätt_svar):
             print("You avoided the trap and got away safely")
-        else:
+        elif player_answer != (rätt_svar):
             trap.trigger(player1)
 
 def menu(player1):
