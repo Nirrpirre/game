@@ -7,26 +7,23 @@ class Player:
         self.strength = 10
         self.level = 1
         self.xp = 0
-        
 
 class Monster:
     def __init__(self, player1):
-        self.monster_strength = rand.randint(1, 20) + player1.level
+        self.monster_strength = rand.randint(1, 10) + player1.level
         self.monster_health = rand.randint(1, 100) + player1.level
         self.monster = rand.choice(["goblin", "zombie", "orc", "pig"])
-
 
 class Trap:
     def __init__(self, player1):
         self.trap_name = rand.choice(["bear", "spike"])
-        self.trap_damage = rand.randint(player1.hp // 4, player1.hp // 2)
+        self.trap_damage = rand.randint(player1.hp // 6, player1.hp // 4)
 
     def trigger(self, player1):
         print(f"You triggered a {self.trap_name} trap!")
         player1.hp -= self.trap_damage
         print(f"You lost {self.trap_damage} hp")
         print(f"Your hp is now {int(player1.hp)}")
-
 
 def display_stats(player1):
     print(f"Health: {int(player1.hp)}")
@@ -84,18 +81,23 @@ def intro(player1):
     else:
         print(f"I understand {player1.name}, maybe another time")
 
-            
-
 def backpack(pack):
     if not pack:
         return "Your backpack is empty"
     else:
         return pack
 
-
+def level_up(player1):
+    xp_required = player1.level * 5
+    if player1.xp >= xp_required:
+        player1.level += 1
+        player1.strength += 2
+        player1.hp += 20
+        player1.xp = 0
+        print(f"You leveled up to level {player1.level}!")
 
 def battle(monster1, player1):
-    print(f'You encounterd a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
+    print(f'You encountered a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
     while monster1.monster_health > 0 and player1.hp > 0:
         print("""
                 1. Attack
@@ -108,51 +110,13 @@ def battle(monster1, player1):
             if monster1.monster_health <= 0:
                 player1.xp += 5
                 print(f"You killed the {monster1.monster}\nYou gained 5 experience")
-                if player1.xp == 20:
-                    player1.level +=1
-                    player1.strength += 2
-                    player1.hp += 20
-                elif player1.xp == 40:
-                    player1.level +=1
-                    player1.strength += 2
-                    player1.hp += 20
-                elif player1.xp == 60:
-                    player1.level +=1
-                    player1.strength += 2
-                    player1.hp += 20
-                elif player1.xp == 80:
-                    player1.level +=1
-                    player1.strength += 2
-                    player1.hp += 20
-                elif player1.xp == 100:
-                    player1.level +=1
-                    player1.strength += 2
-                    player1.hp += 20
-                elif player1.xp == 120:
-                    player1.level +=1
-                    player1.strength += 2
-                    player1.hp += 20
-                elif player1.xp == 140:
-                    player1.level +=1
-                    player1.strength += 2
-                    player1.hp += 20
-                elif player1.xp == 160:
-                    player1.level +=1
-                    player1.strength += 2
-                    player1.hp += 20
-                elif player1.xp == 180:
-                    player1.level +=1
-                    player1.strength += 2
-                    player1.hp += 20
-                    break
-    
+                level_up(player1)
+                break
             else:
                 player1.hp -= monster1.monster_strength
         elif Action == "2":
             print("You fled")
             break
-
-
 
 def travel(player1, trap, pack):
     departure = rand.randint(1, 3)
@@ -162,7 +126,7 @@ def travel(player1, trap, pack):
     elif departure == 2:
         chestitems = Items()
         print("You found a chest!")
-        if len(pack) < 5: 
+        if len(pack) < 5:
             if chestitems.name == "longbow" or chestitems.name == "iron sword":
                 player1.strength *= (chestitems.strength_bonus + 1)
                 print(f"Your strength increased by {round(chestitems.strength_bonus, 2) * 100}%")
@@ -175,10 +139,11 @@ def travel(player1, trap, pack):
             print("Your backpack is full. You cannot carry more items.")
     elif departure == 3:
         print("You encountered a trap")
-        if rand.random() < 0.5:
-            trap.trigger(player1)
-        else:
+        player_answer = (int.input(""))
+        if player_answer == rand.random(1,3):
             print("You avoided the trap and got away safely")
+        else:
+            trap.trigger(player1)
 
 def menu(player1):
     print("**********Welcome to The Dark Dungeons**********\n")
@@ -198,13 +163,11 @@ def menu(player1):
         elif camp == "3":
             print(backpack(pack))
     if player1.hp < 0:
-        print("You got died, better luck next time")
-        
-
+        print("You got killed, better luck next time.")
 
 def main():
     player1 = Player()
     intro(player1)
     menu(player1)
-main()
 
+main()
