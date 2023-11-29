@@ -92,11 +92,11 @@ def battle(monster1, player1):
     print(f''' 
         You encountered a: \n
                     --{monster1.monster}--
-                    {monster1.name} Strength: {monster1.monster_strength}
-                    {monster1.name} Health:   {monster1.monster_health}
+                    {monster1.monster} Strength: {monster1.monster_strength}
+                    {monster1.monster} Health:   {monster1.monster_health}
 
                     --{player1.name}--
-                    {player1.name}  Strenght: {player1.strenght}
+                    {player1.name}  Strenght: {player1.strength}
                     {player1.name}  Health:   {player1.hp}
                     
                     ''')
@@ -111,11 +111,11 @@ def battle(monster1, player1):
         if Action == "1":
             monster1.monster_health -= player1.strength
             print(f"""--{monster1.monster}--
-                    {monster1.name} Strength: {monster1.monster_strength}
-                    {monster1.name} Health:   {monster1.monster_health}
+                    {monster1.monster} Strength: {monster1.monster_strength}
+                    {monster1.monster} Health:   {monster1.monster_health}
 
                     --{player1.name}--
-                    {player1.name}  Strenght: {player1.strenght}
+                    {player1.name}  Strenght: {player1.strength}
                     {player1.name}  Health:   {player1.hp}
                     """)
             if monster1.monster_health <= 0:
@@ -183,7 +183,7 @@ def menu(player1):
                 2.  Stats 
                 3.  Backpack 
 
-                    Please enter your choice: """)
+Please enter your choice: """)
         if camp == "1":
             trap = Trap(player1)
             travel(player1, trap, pack)
