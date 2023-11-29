@@ -16,7 +16,7 @@ class Monster:
 
 class Trap:
     def __init__(self, player1):
-        self.trap_name = rand.choice(["bear", "spike"])
+        self.trap_name = rand.choice(["bear trap", "spike trap", "goblin gang"])
         self.trap_damage = rand.randint(player1.hp // 4, player1.hp // 2)
 
     def trigger(self, player1):
@@ -139,7 +139,7 @@ def travel(player1, trap, pack):
             print("Your backpack is full. You cannot carry more items.")
     elif departure == 3:
         rätt_svar = rand.randint(1,3)
-        print("You encountered a trap")
+        print(f"You encountered a {trap.trap_name}")
         print ('Guess a number between 1 and 4 to have a chance to escape!')
         while True:
             player_answer = int(input(""))
