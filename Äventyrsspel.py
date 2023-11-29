@@ -88,11 +88,11 @@ def backpack(pack):
         return pack
 
 def level_up(player1):
-    xp_required = player1.level * 5
+    xp_required = player1.level * 10
     if player1.xp >= xp_required:
         player1.level += 1
         player1.strength += 2
-        player1.hp += 20
+        player1.hp += 10
         player1.xp = 0
         print(f"You leveled up to level {player1.level}!")
 
