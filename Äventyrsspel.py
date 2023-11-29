@@ -133,7 +133,7 @@ You gained 5 experience""")
         elif Action == "2":
             print("You fled")
             break
-        elif Action == "2":
+        elif Action == "3":
             if "Health potion" in pack:
                 player1.hp += 20
                 if player1.hp > player1.max_hp:
