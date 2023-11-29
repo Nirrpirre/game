@@ -104,7 +104,7 @@ def battle(monster1, player1):
         Action = input("Attack or Flee ")
         if Action == "1":
             monster1.monster_health -= player1.strength
-            print(f"{monster1.monster} Health:{monster1.monster_health} {player1.name} Health:{player1.hp}")
+            print(f"{monster1.monster} Health:{round(monster1.monster_health)} {player1.name} Health:{round(player1.hp)}")
             if monster1.monster_health <= 0:
                 player1.xp += 5
                 print(f"You killed the {monster1.monster}\nYou gained 5 experience")
