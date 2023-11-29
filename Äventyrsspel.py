@@ -39,9 +39,12 @@ def display_stats(player1):
 class Items:
     def __init__(self):
         self.name = rand.choice(["longbow", "iron sword", "iron armor", "iron shield", "Health potion"])
-        self.strength_bonus = rand.uniform(0.1, 0.2) if self.name in ["longbow", "iron sword"] else 0
-        self.hp_bonus = rand.uniform(0.1, 0.2) if self.name not in ["longbow", "iron sword", "Health potion"] else 0
-
+        if self.name == "longbow" or self.name == "iron sword":
+            self.strength_bonus = rand.uniform(0.1, 0.2)
+        elif self.name == "Health potion":
+            pass
+        else:
+            self.hp_bonus = rand.uniform(0.1, 0.2)
 
 def display_stats(player1):
     print(f"Health: {int(player1.hp)}")
@@ -104,7 +107,6 @@ def battle(monster1, player1, pack):
         print("""
                 1. Attack
                 2. Flee
-                3. Health pot
                                 """)
         Action = input("Attack or Flee?: ")
         if Action == "1":
@@ -131,7 +133,7 @@ You gained 5 experience""")
         elif Action == "2":
             print("You fled")
             break
-        elif Action == "3":
+        elif Action == "2":
             if "Health potion" in pack:
                 player1.hp += 20
                 if player1.hp > player1.max_hp:
