@@ -39,12 +39,9 @@ def display_stats(player1):
 class Items:
     def __init__(self):
         self.name = rand.choice(["longbow", "iron sword", "iron armor", "iron shield", "Health potion"])
-        if self.name == "longbow" or self.name == "iron sword":
-            self.strength_bonus = rand.uniform(0.1, 0.2)
-        elif self.name == "Health potion":
-            pass
-        else:
-            self.hp_bonus = rand.uniform(0.1, 0.2)
+        self.strength_bonus = rand.uniform(0.1, 0.2) if self.name in ["longbow", "iron sword"] else 0
+        self.hp_bonus = rand.uniform(0.1, 0.2) if self.name not in ["longbow", "iron sword", "Health potion"] else 0
+
 
 def display_stats(player1):
     print(f"Health: {int(player1.hp)}")
@@ -56,7 +53,7 @@ def intro(player1):
     player1.name = str(input("""
                     What is your name, adventurer?: """))
     
-    if input("Enter 1 to read the story or any other key to continue with the adventure: ") == 1:
+    if int(input("Enter 1 to read the story or any other key to continue with the adventure: ")) == 1:
         print("""
     In the forsaken realm of Eldrath, 
     a once-prosperous kingdom now teeters on the edge of darkness. 
@@ -94,17 +91,26 @@ def level_up(player1):
         print(f"""
 You leveled up to level {player1.level}!""")
 
-def battle(monster1, player1):
-    print(f'You encountered a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
+def battle(monster1, player1, pack):
+    print(f'''You encountered a
+                    --{monster1.monster}--
+                    {monster1.monster} Strength: {monster1.monster_strength}
+                    {monster1.monster} Health:   {monster1.monster_health}
+
+                    --{player1.name}--
+                    {player1.name}  Strenght: {player1.strength}
+                    {player1.name}  Health:   {player1.hp}''')
     while monster1.monster_health > 0 and player1.hp > 0:
         print("""
                 1. Attack
                 2. Flee
+                3. Health pot
                                 """)
         Action = input("Attack or Flee?: ")
         if Action == "1":
             monster1.monster_health -= player1.strength
-            print(f"""--{monster1.monster}--
+            print(f"""
+                    --{monster1.monster}--
                     {monster1.monster} Strength: {monster1.monster_strength}
                     {monster1.monster} Health:   {monster1.monster_health}
 
@@ -125,7 +131,7 @@ You gained 5 experience""")
         elif Action == "2":
             print("You fled")
             break
-        elif Action == "2":
+        elif Action == "3":
             if "Health potion" in pack:
                 player1.hp += 20
                 if player1.hp > player1.max_hp:
@@ -146,7 +152,7 @@ def travel(player1, trap, pack):
     chestitems = Items()
     if departure == 1:
         monster1 = Monster(player1)
-        battle(monster1, player1, pack, chestitems)
+        battle(monster1, player1, chestitems)
     elif departure == 2:
         chestitems = Items()
         print("You found a chest!")
@@ -167,7 +173,6 @@ Your backpack is full. You cannot carry more items.""")
     elif departure == 3:
         rätt_svar = rand.randint(1,3)
         print(f"You encountered a {trap.trap_name}")
-        print ('Guess a number between 1 and 4 to have a chance to escape!')
         while True:
             player_answer = int(input("""
 Guess a number between 1 and 4 to have a chance to escape!: """))
