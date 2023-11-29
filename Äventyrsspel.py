@@ -1,5 +1,5 @@
 import random as rand
-
+#hej hej
 class Player:
     def __init__(self):
         self.name = ""
