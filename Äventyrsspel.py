@@ -12,15 +12,15 @@ class Monster:
     def __init__(self, player1):
         self.monster_strength = rand.randint(1, 10) + player1.level
         self.monster_health = rand.randint(1, 100) + player1.level
-        self.monster = rand.choice(["goblin", "zombie", "orc", "pig"])
+        self.monster = rand.choice(["Goblin", "Zombie", "Orc", "Pig", "Monkey"])
 
 class Trap:
     def __init__(self, player1):
-        self.trap_name = rand.choice(["bear trap", "spike trap", "Electric lake", "lava pool"])
+        self.trap_name = rand.choice(["Bear trap", "Spike trap", "Electric lake", "Lava pool"])
         self.trap_damage = rand.randint(player1.hp // 4, player1.hp // 2)
 
     def trigger(self, player1):
-        if self.trap_name == "goblin gang" or "lava pool":
+        if self.trap_name == "Electric lake" or "Lava pool":
             print(f"""
         You fell into the {self.trap_name}""")
         else:
@@ -90,7 +90,7 @@ You leveled up to level {player1.level}!""")
 
 def battle(monster1, player1):
     print(f''' 
-        You encountered a \n
+        You encountered a: \n
                     --{monster1.monster}--
                     {monster1.name} Strength: {monster1.monster_strength}
                     {monster1.name} Health:   {monster1.monster_health}
@@ -110,7 +110,14 @@ def battle(monster1, player1):
         Action = input("Attack or Flee?: ")
         if Action == "1":
             monster1.monster_health -= player1.strength
-            print(f"{monster1.monster} Health:{monster1.monster_health} {player1.name} Health:{player1.hp}")
+            print(f"""--{monster1.monster}--
+                    {monster1.name} Strength: {monster1.monster_strength}
+                    {monster1.name} Health:   {monster1.monster_health}
+
+                    --{player1.name}--
+                    {player1.name}  Strenght: {player1.strenght}
+                    {player1.name}  Health:   {player1.hp}
+                    """)
             if monster1.monster_health <= 0:
                 player1.xp += 5
                 print(f"""
@@ -126,7 +133,7 @@ You fled""")
             break
 
 def travel(player1, trap, pack):
-    departure = rand.randint(3, 3)
+    departure = rand.randint(1, 3)
     if departure == 1:
         monster1 = Monster(player1)
         battle(monster1, player1)
