@@ -14,7 +14,7 @@ class Monster:
     def __init__(self, player1):
         self.monster_strength = rand.randint(1, 10) + player1.level
         self.monster_health = rand.randint(1, 100) + player1.level
-        self.monster = rand.choice(["Goblin", "Zombie", "Orc", "Pig", "Monkey"])
+        self.monster = rand.choice(["Goblin", "Zombie", "Ogre", "Pig", "Monkey", "Skeleton"])
         
 
 class Trap:
@@ -166,6 +166,178 @@ def travel(player1, trap, pack, monster1):
                            an undead behemoth with a hunger for the living.""", "In the depths of the ocean, where sunlight struggles to pierce the inky blackness, a hidden abyss conceals unspeakable horrors. Your submarine descends into the crushing pressure, and strange, luminescent creatures swim by. Suddenly, a colossal Kraken emerges from the abyss, its tentacles reaching out with malicious intent.", "Abandoned for centuries, the forgotten mines echo with the clang of pickaxes long silenced. As your party delves deeper, the air thickens with the stench of sulfur. Unearthly growls resonate, and the walls seem to close in. The Stone Golem, a creature crafted from the very rock of the mines, awakens to guard its subterranean domain.", "Perched atop a mountain, the celestial observatory offers a breathtaking view of the cosmos. However, as the stars align in an otherworldly pattern, the air crackles with celestial energy. A portal opens, revealing the Astral Serpent, a serpentine entity from the astral plane, hungry for the essence of those who dare to gaze upon the heavens.", "A serene glade in the heart of the Feywild holds an enchanting allure. Vibrant flowers dance to an ethereal melody, but as night falls, mischievous whispers turn ominous. The foliage morphs into the Lurking Briarthorn, a sentient plant creature with thorns that can pierce both flesh and magical defenses.", "Amidst the bubbling lava and ashy plumes of a volcanic caldera, your party ventures toward an ancient altar. Unbeknownst to them, the molten rock stirs, and the fiery form of the Magma Goliath emerges. With every step, the ground quakes, and rivers of magma flow in its wake.","At the border of realms, the Twilight Citadel stands as a mysterious nexus. As your party ascends its towering spires, an otherworldly hum fills the air. Suddenly, the ethereal veil shatters, and the Nightshade Specter materializes—an entity born from the merging of light and shadow, hungry for the life force of interlopers."]))
         
         monster1 = Monster(player1)
+        print("Traveling...")
+        time.sleep(1 )
+        if monster1.monster == ("Skeleton"):
+            print(r'''
+                                          __ _
+                                        .'  Y '>,
+            )| \)                      / _   _   \
+           //)|\\                      )(_) (_)(|}
+          / ^| \ \                     {  4A   } /
+         //^| || \\                     \uLuJJ/\l
+        >//||| |\\\|                    |3    p)/
+        | """""  7/>l__ _____ ____      /nnm_n//
+        L>_   _-< 7/|_-__,__-)\,__)(".  \_>-<_/D
+        )D" Y "c)  9)       //V     \_"-._.__G G_c__.-__<"/ ( \
+         | | |  |(|               < "-._"> _.G_.___)\   \7\
+          \"=" // |              (,"-.__.|\ \<.__.-" )   \ \
+           '---'  |              |,"-.__"| \!"-.__.-".\   \ \
+             |_;._/              (_"-.__"'\ \"-.__.-".|    \_\
+             )(" V                \"-.__"'|\ \-.__.-".)     \ \
+                (                  "-.__'"\_\ \.__.-"./      \ l
+                 )                  ".__"">>G\ \__.-">        V )
+                                        ""  G<\ \_.-"        ./7
+                                             G<\ \          ///
+                                        ___  GD'
+                                   /  /             )E_>"
+                                 _/  (             |  \()
+                                / \ /              |  |
+                                /\\|               |  |
+                               / '((               |  |
+                              /  / )\              \  |
+                             /  y  \y              |Y |
+                            /  /    (              |  |
+                           L ."     |              |  /
+                          | \(                     |  |
+                           \_|                     |  |
+                           |  \                    { "|
+                           | ||                    |  |
+                           |x||                    \_,/
+                           } ||                    / \'
+                           | ||                    |_/
+                           | (|                    | }\
+                           | ||                    } ||
+                           | ||                    | ||
+                           | ||                    |\||
+                           / ||                    | ||
+                           | ||                    ( |!
+                           | |/                    ) ||
+                         _/   \                    | }|
+                     _.-"_ ( )|                 ! ||
+                  c_"-_-"_    )                    | ||
+                   c,-_-'_--""                     { ||
+                   "C(_/"                          \ /|
+                                                   (! )
+                                                   /| \
+                                                  /  |(
+                                                 /7||\\
+                                                ()U cUu
+''')
+        if monster1.monster == ("Goblin"):
+            print(r'''
+             ,      ,
+            /(.-""-.)\
+        |\  \/      \/  /|
+        | \ / =.  .= \ / |
+        \( \   o\/o   / )/
+         \_, '-/  \-' ,_/
+           /   \__/   \
+           \ \__/\__/ /
+         ___\ \|--|/ /___
+       /`    \      /    `\
+  jgs /       '----'       \
+''')
+        if monster1.monster == ("Zombie"):
+            print(r'''
+              ,
+          _,-""-._
+        ,"        ".
+       /    ,-,  ,"\
+      "    /   \ | o|
+      \    `-o-"  `-',
+       `,   _.--'`'--`
+         `--`---'                    
+           ,' '      
+         ./ ,  `,    
+         / /     \
+        (_)))_ _,"
+           _))))_,
+  --------(_,-._)))-------------------------------
+''')
+        if monster1.monster == ("Pig"):
+            print(r'''
+              ,
+              , `.
+              |   `.
+              `     `.
+               \___   \
+     ,---._   ,'   -`./
+  ,-"      "-/ .__ /* `._
+  `.         |  * ,-.  _ `
+    `.       ,  , `-' ,'  `
+      `-----"| '`----"    |
+             \       /    |
+              \           "
+               `.        /_
+                 `._   _/| \
+                  (  ".  '  \
+                   \   `.`.  .
+                   |`    \"  |\
+                   | `.   `.,' .
+                   |   `.   \  |
+                   |    ,`   | |
+                   |    `-`-"  ,
+                   `          ,
+                    `.     _,'
+                      `.--" |
+                       | || |  .-.
+                       | |, `,'   )
+                   ___,' \       ,
+                  /      /------"
+                  \____,"  
+''')
+        if monster1.monster == ("Monkey"):
+            print(r'''
+                      __,__
+             .--.  .-"     "-.  .--.
+            / .. \/  .-. .-.  \/ .. \
+           | |  '|  /   Y   \  |'  | |
+           | \   \  \ 0 | 0 /  /   / |
+            \ '- ,\.-"`` ``"-./, -' /
+             `'-' /_   ^ ^   _\ '-'`
+             .--'|  \._ _ _./  |'--.
+           /`    \   \.-.  /   /    `\
+          /       '._/  |-' _.'       \
+         /          ;  /--~'   |       \
+        /        .'\|.-\--.     \       \
+       /   .'-. /.-.;\  |\|'~'-.|\       \
+       \       `-./`|_\_/ `     `\'.      \
+        '.      ;     ___)        '.`;    /
+          '-.,_ ;     ___)          \/   /
+           \   ``'------'\       \   `  /
+            '.    \       '.      |   ;/_
+     jgs  ___>     '.       \_ _ _/   ,  '--.
+        .'   '.   .-~~~~~-. /     |--'`~~-.  \
+       // / .---'/  .-~~-._/ / / /---..__.'  /
+      ((_(_/    /  /      (_(_(_(---.__    .'
+                | |     _              `~~`
+                | |     \'.
+                 \ '....' |
+                  '.,___.'
+''')
+        if monster1.monster == ("Ogre"):
+            print(r'''
+                           __,='`````'=/__
+                          '//  (o) \(o) \ `'         _,-,
+                          //|     ,_)   (`\      ,-'`_,-\
+                        ,-~~~\  `'==='  /-,      \==```` \__
+                       /        `----'     `\     \       \/
+                    ,-`                  ,   \  ,.-\       \
+                   /      ,               \,-`\`_,-`\_,..--'\
+                  ,`    ,/,              ,>,   )     \--`````\
+                  (      `\`---'`  `-,-'`_,<   \      \_,.--'`
+                   `.      `--. _,-'`_,-`  |    \
+                    [`-.___   <`_,-'`------(    /
+                    (`` _,-\   \ --`````````|--`
+                     >-`_,-`\,-` ,          |
+                   <`_,'     ,  /\          /
+                    `  \/\,-/ `/  \/`\_/V\_/
+                       (  ._. )    ( .__. )
+                       |      |    |      |
+                        \,---_|    |_---./
+                        ooOO(_)    (_)OOoo
+''')
         battle(monster1, player1, pack)
     elif departure == 2:
         print("You found a chest!")
