@@ -159,7 +159,7 @@ def travel(player1, trap, pack):
                 player1.strength *= (chestitems.strength_bonus + 1)
                 print(f"Your strength increased by {round(chestitems.strength_bonus, 2) * 100}%")
             elif chestitems.name == "iron armor" or chestitems.name == "iron shield":
-                player1.hp *= (chestitems.hp_bonus)
+                player1.hp *= (chestitems.hp_bonus + 1)
                 print(f"""
 Your health increased by {round(chestitems.hp_bonus, 2) * 100}%""")
             print(f"""
