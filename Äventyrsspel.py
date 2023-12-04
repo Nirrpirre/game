@@ -1,6 +1,7 @@
 import random as rand
 import time
 #jief
+#fjiwf
 class Player:
     def __init__(self):
         self.name = ""
@@ -14,6 +15,7 @@ class Monster:
         self.monster_strength = rand.randint(1, 10) + player1.level
         self.monster_health = rand.randint(1, 100) + player1.level
         self.monster = rand.choice(["Goblin", "Zombie", "Orc", "Pig", "Monkey"])
+        
 
 class Trap:
     def __init__(self, player1):
@@ -110,15 +112,15 @@ def battle(monster1, player1, pack):
         if Action == "1":
             monster1.monster_health -= player1.strength
             if monster1.monster_health <= 0:
-                monster1.monster_health = 0
+                monster1.monster_health == 0
             print(f"""
                     --{monster1.monster}--
-                    {monster1.monster} Strength: {monster1.monster_strength}
-                    {monster1.monster} Health:   {monster1.monster_health}
+                    {monster1.monster} Strength: {int(monster1.monster_strength)}
+                    {monster1.monster} Health:   {int(monster1.monster_health)}
 
                     --{player1.name}--
-                    {player1.name}  Strenght: {player1.strength}
-                    {player1.name}  Health:   {player1.hp}
+                    {player1.name}  Strenght: {int(player1.strength)}
+                    {player1.name}  Health:   {int(player1.hp)}
                     """)
             if monster1.monster_health <= 0:
                 player1.xp += 5
@@ -149,61 +151,19 @@ def travel(player1, trap, pack, monster1):
     departure = rand.randint(1, 3)
     chestitems = Items()
     if departure == 1:
-        print(rand.choice([f"""
-                           In the heart of the Whispering Woods, 
+        print(rand.choice(["""In the heart of the Whispering Woods, 
                            where trees share secrets in hushed tones, 
                            a mysterious mist clings to the air. 
                            As you venture deeper, the ethereal whispers grow louder, 
                            weaving tales of ancient magic. Suddenly, 
-                           the foliage shivers, and from the shadows emerges a fearsome --{monster1.monster}--.""", 
-                           f"""
-                           Within the crumbling walls of an abandoned asylum, 
-                           the air is thick with the lingering despair of tortured souls. 
-                           As your group explores the decaying corridors, 
-                           distant cries echo through the darkness. 
-                           A cold wind sweeps the hallway, extinguishing torches, 
-                           and in the pitch-black silence, a ghastly --{monster1.monster}-- materializes before you.""",
-                           f"""
-                           Across the vast expanse of the Frozen Tundra, 
-                           where icy winds howl and snow blankets the land, 
-                           an ominous stillness settles. As your party trudges through the deep snow, 
-                           strange footprints appear, leading to an ancient, frozen structure. 
-                           Suddenly, the icy winds form into an icy --{monster1.monster}-- that hungers for warmth.""", 
-                           f"""
-                           Beneath the city, 
-                           a labyrinth of forgotten catacombs hides the bones of countless generations. 
-                           Torchlight flickers on damp walls as your party delves into the depths. 
-                           Unearthly whispers fill the air, 
-                           and shadows meld into a monstrous --{monster1.monster}-- that hungers for the living.""", 
-                           f"""
-                           Perched atop a mountain, 
-                           the celestial observatory offers a breathtaking view of the cosmos. 
-                           As your party marvels at the stars, 
-                           a sudden cosmic alignment triggers a surge of otherworldly energy. 
-                           The air crackles, and a celestial --{monster1.monster}-- descends from the heavens, 
-                           drawn by the celestial convergence.""", 
-                           f"""
-                           In the ocean's abyssal depths, 
-                           where sunlight struggles to penetrate, 
-                           a hidden abyss conceals unspeakable horrors.
-                           Your submarine descends into the crushing pressure, 
-                           and strange, luminescent creatures swim by. Suddenly, 
-                           a colossal --{monster1.monster}-- emerges, 
-                           its tentacles reaching out with malicious intent.""", 
-                           f"""
-                           Amidst the ruins of a once-thriving hamlet, 
-                           a ghostly mist clings to the dilapidated buildings. 
-                           The wind carries distant whispers of tragedy, 
-                           and as your party explores, 
-                           the mournful wails coalesce into a haunting --{monster1.monster}-- 
-                           that seeks to bind the living to its sorrowful fate.""",
-                           f"""
-                           Amidst the bubbling lava and ashy plumes of a volcanic caldera, 
-                           your party ventures toward an ancient altar. 
-                           Unbeknownst to them, the molten rock stirs, 
-                           and the ground trembles. 
-                           Rivers of magma flow as a fiery {monster1.monster} emerges from the depths, 
-                           hungry for the intruders."""]))
+                           the foliage shivers, and from the shadows emerges a fearsome ?.""", 
+                           """Beneath the moonlit graveyard lies a network of cursed crypts, 
+                           their stone doors sealed with ominous runes. 
+                           As you explore the shadowy catacombs, 
+                           whispers of long-forgotten souls fill the air. 
+                           An ancient curse awakens, and the ground trembles. 
+                           From the darkness rises the Tomb Guardian, 
+                           an undead behemoth with a hunger for the living.""", "In the depths of the ocean, where sunlight struggles to pierce the inky blackness, a hidden abyss conceals unspeakable horrors. Your submarine descends into the crushing pressure, and strange, luminescent creatures swim by. Suddenly, a colossal Kraken emerges from the abyss, its tentacles reaching out with malicious intent.", "Abandoned for centuries, the forgotten mines echo with the clang of pickaxes long silenced. As your party delves deeper, the air thickens with the stench of sulfur. Unearthly growls resonate, and the walls seem to close in. The Stone Golem, a creature crafted from the very rock of the mines, awakens to guard its subterranean domain.", "Perched atop a mountain, the celestial observatory offers a breathtaking view of the cosmos. However, as the stars align in an otherworldly pattern, the air crackles with celestial energy. A portal opens, revealing the Astral Serpent, a serpentine entity from the astral plane, hungry for the essence of those who dare to gaze upon the heavens.", "A serene glade in the heart of the Feywild holds an enchanting allure. Vibrant flowers dance to an ethereal melody, but as night falls, mischievous whispers turn ominous. The foliage morphs into the Lurking Briarthorn, a sentient plant creature with thorns that can pierce both flesh and magical defenses.", "Amidst the bubbling lava and ashy plumes of a volcanic caldera, your party ventures toward an ancient altar. Unbeknownst to them, the molten rock stirs, and the fiery form of the Magma Goliath emerges. With every step, the ground quakes, and rivers of magma flow in its wake.","At the border of realms, the Twilight Citadel stands as a mysterious nexus. As your party ascends its towering spires, an otherworldly hum fills the air. Suddenly, the ethereal veil shatters, and the Nightshade Specter materializes—an entity born from the merging of light and shadow, hungry for the life force of interlopers."]))
         
         monster1 = Monster(player1)
         battle(monster1, player1, pack)
