@@ -109,7 +109,10 @@ def battle(monster1, player1, pack):
         Action = input("Attack, Use Health potion, Flee?: ")
         if Action == "1":
             monster1.monster_health -= player1.strength
-            print(f"""--{monster1.monster}--
+            if monster1.monster_health <= 0:
+                monster1.monster_health == 0
+            print(f"""
+                    --{monster1.monster}--
                     {monster1.monster} Strength: {monster1.monster_strength}
                     {monster1.monster} Health:   {monster1.monster_health}
 
@@ -118,7 +121,6 @@ def battle(monster1, player1, pack):
                     {player1.name}  Health:   {player1.hp}
                     """)
             if monster1.monster_health <= 0:
-                monster1.monster_health = 0
                 player1.xp += 5
                 print(f"""
 You killed the {monster1.monster}
@@ -173,9 +175,9 @@ Your backpack is full. You cannot carry more items.""")
         print(f"You encountered a {trap.trap_name}")
         print ('Guess a number between 1 and 4 to have a chance to escape!')
         while True:
-            player_answer = int(input("""
-Guess a number between 1 and 4 to have a chance to escape!: """))
-            if player_answer == 1 or player_answer == 2 or player_answer == 3 or player_answer == 4:
+            player_answer = input("""
+Guess a number between 1 and 4 to have a chance to escape!: """)
+            if player_answer == "1" or player_answer == "2" or player_answer == "3" or player_answer == "4":
                 break
         if player_answer == (rätt_svar):
             print("You avoided the trap and got away safely")
