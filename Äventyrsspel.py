@@ -1,6 +1,7 @@
 import random as rand
 import time
 #jief
+#fjiwf
 class Player:
     def __init__(self):
         self.name = ""
@@ -153,7 +154,6 @@ def travel(player1, trap, pack):
     departure = rand.randint(1, 3)
     chestitems = Items()
     if departure == 1:
-        
         monster1 = Monster(player1)
         battle(monster1, player1, pack)
     elif departure == 2:
