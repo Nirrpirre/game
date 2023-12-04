@@ -57,7 +57,7 @@ def intro(player1):
     player1.name = str(input("""
                     What is your name, adventurer?: """))
     
-    if input("Enter 1 to read the story or any other key to continue with the adventure: ") == 1:
+    if input("Enter 1 to read the story or any other key to continue with the adventure: ") == "1":
         print("""
     In the forsaken realm of Eldrath, 
     a once-prosperous kingdom now teeters on the edge of darkness. 
