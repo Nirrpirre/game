@@ -171,7 +171,6 @@ Your backpack is full. You cannot carry more items.""")
     elif departure == 3:
         rätt_svar = rand.randint(1,3)
         print(f"You encountered a {trap.trap_name}")
-        print ('Guess a number between 1 and 4 to have a chance to escape!')
         while True:
             player_answer = int(input("""
 Guess a number between 1 and 4 to have a chance to escape!: """))
