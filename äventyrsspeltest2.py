@@ -1,5 +1,5 @@
 import random as rand
-
+#jief
 class Player:
     def __init__(self):
         self.name = ""
@@ -8,7 +8,6 @@ class Player:
         self.strength = 10
         self.level = 1
         self.xp = 0
-
 class Monster:
     def __init__(self, player1):
         self.monster_strength = rand.randint(1, 10) + player1.level
@@ -21,7 +20,7 @@ class Trap:
         self.trap_damage = rand.randint(player1.hp // 4, player1.hp // 2)
 
     def trigger(self, player1):
-        if self.trap_name == "Electric lake" or self.trap_name == "Lava pool":
+        if self.trap_name == "Electric lake" or "Lava pool":
             print(f"""
         You fell into the {self.trap_name}""")
         else:
@@ -31,20 +30,23 @@ class Trap:
         print(f"You lost {self.trap_damage} hp")
         print(f"Your hp is now {int(player1.hp)}")
 
+def display_stats(player1):
+    print(f"Health: {int(player1.hp)}")
+    print(f"Strength: {int(player1.strength)}")
+    print(f"Level: {player1.level}")
+    print(f"Xp: {player1.xp}")
+
 class Items:
-    def __init__(self, pack):
+    def __init__(self):
         self.name = rand.choice(["longbow", "iron sword", "iron armor", "iron shield", "Health potion"])
         self.strength_bonus = rand.uniform(0.1, 0.2) if self.name in ["longbow", "iron sword"] else 0
         self.hp_bonus = rand.uniform(0.1, 0.2) if self.name not in ["longbow", "iron sword", "Health potion"] else 0
 
-        # Check if the item is already in the inventory
-        while any(item.name == self.name for item in pack):
-            self.name = rand.choice(["longbow", "iron sword", "iron armor", "iron shield", "Health potion"])
+    def __str__(self):
+        return self.name
 
-    def travel(player1, trap, pack):
-        departure = rand.randint(1, 3)
-        chestitems = Items(pack)
-        # rest of the code...
+    def is_health_potion(self):
+        return self.name == "Health potion"
 
 def display_stats(player1):
     print(f"Health: {int(player1.hp)}")
@@ -79,11 +81,10 @@ def intro(player1):
 
 def backpack(pack):
     if not pack:
-        return "Your backpack is empty"
+        return """
+Your backpack is empty"""
     else:
-        item_names = [item.name for item in pack]
-        return ', '.join(item_names)
-
+        return pack
 
 def level_up(player1):
     xp_required = player1.level * 10
@@ -108,7 +109,6 @@ def battle(monster1, player1, pack):
         print("""
                 1. Attack
                 2. Flee
-                3. Health pot
                                 """)
         Action = input("Attack or Flee?: ")
         if Action == "1":
@@ -136,21 +136,24 @@ You gained 5 experience""")
             print("You fled")
             break
         elif Action == "3":
-            health_potions = [item for item in pack if item.is_health_potion]
-            if any(health_potions):
+            if "Health potion" in pack:
                 player1.hp += 20
                 if player1.hp > player1.max_hp:
                     player1.hp = player1.max_hp
-                pack = [item for item in pack if not item.is_health_potion]  # Remove the used Health potion
+                pack.remove ('Health potion')
                 print(f"""
 You used a health potion and recovered 20 hp
 Your hp is now: {player1.hp}""")
             else:
                 print ('You do not have any health potions')
 
+
+            
+            
+
 def travel(player1, trap, pack):
-    departure = rand.randint(1,3)
-    chestitems = [Items()]
+    departure = rand.randint(1,1)
+    chestitems = Items()
     if departure == 1:
         monster1 = Monster(player1)
         battle(monster1, player1, chestitems)
@@ -158,16 +161,16 @@ def travel(player1, trap, pack):
         chestitems = Items()
         print("You found a chest!")
         if len(pack) < 5:
-            if chestitems[0].name == "longbow" or chestitems[0].name == "iron sword":
-                player1.strength *= (chestitems[0].strength_bonus + 1)
-                print(f"Your strength increased by {round(chestitems[0].strength_bonus, 2) * 100}%")
+            if chestitems.name == "longbow" or chestitems.name == "iron sword":
+                player1.strength *= (chestitems.strength_bonus + 1)
+                print(f"Your strength increased by {round(chestitems.strength_bonus, 2) * 100}%")
             else:
-                player1.hp *= (chestitems[0].hp_bonus + 1)
+                player1.hp *= (chestitems.hp_bonus + 1)
                 print(f"""
-Your health increased by {round(chestitems[0].hp_bonus, 2) * 100}%""")
+Your health increased by {round(chestitems.hp_bonus, 2) * 100}%""")
             print(f"""
-You got a new {chestitems[0].name}""")
-            pack.append(chestitems[0])
+You got a new {chestitems.name}""")
+            pack.append(chestitems.name)
         else:
             print("""
 Your backpack is full. You cannot carry more items.""")
