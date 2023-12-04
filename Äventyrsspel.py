@@ -150,6 +150,20 @@ def travel(player1, trap, pack):
     departure = rand.randint(1, 3)
     chestitems = Items()
     if departure == 1:
+        print(rand.choice(["""In the heart of the Whispering Woods, 
+                           where trees share secrets in hushed tones, 
+                           a mysterious mist clings to the air. 
+                           As you venture deeper, the ethereal whispers grow louder, 
+                           weaving tales of ancient magic. Suddenly, 
+                           the foliage shivers, and from the shadows emerges a fearsome ?.""", 
+                           """Beneath the moonlit graveyard lies a network of cursed crypts, 
+                           their stone doors sealed with ominous runes. 
+                           As you explore the shadowy catacombs, 
+                           whispers of long-forgotten souls fill the air. 
+                           An ancient curse awakens, and the ground trembles. 
+                           From the darkness rises the Tomb Guardian, 
+                           an undead behemoth with a hunger for the living.""", "In the depths of the ocean, where sunlight struggles to pierce the inky blackness, a hidden abyss conceals unspeakable horrors. Your submarine descends into the crushing pressure, and strange, luminescent creatures swim by. Suddenly, a colossal Kraken emerges from the abyss, its tentacles reaching out with malicious intent.", "Abandoned for centuries, the forgotten mines echo with the clang of pickaxes long silenced. As your party delves deeper, the air thickens with the stench of sulfur. Unearthly growls resonate, and the walls seem to close in. The Stone Golem, a creature crafted from the very rock of the mines, awakens to guard its subterranean domain.", "Perched atop a mountain, the celestial observatory offers a breathtaking view of the cosmos. However, as the stars align in an otherworldly pattern, the air crackles with celestial energy. A portal opens, revealing the Astral Serpent, a serpentine entity from the astral plane, hungry for the essence of those who dare to gaze upon the heavens.", "A serene glade in the heart of the Feywild holds an enchanting allure. Vibrant flowers dance to an ethereal melody, but as night falls, mischievous whispers turn ominous. The foliage morphs into the Lurking Briarthorn, a sentient plant creature with thorns that can pierce both flesh and magical defenses.", "Amidst the bubbling lava and ashy plumes of a volcanic caldera, your party ventures toward an ancient altar. Unbeknownst to them, the molten rock stirs, and the fiery form of the Magma Goliath emerges. With every step, the ground quakes, and rivers of magma flow in its wake.","At the border of realms, the Twilight Citadel stands as a mysterious nexus. As your party ascends its towering spires, an otherworldly hum fills the air. Suddenly, the ethereal veil shatters, and the Nightshade Specter materializes—an entity born from the merging of light and shadow, hungry for the life force of interlopers."]))
+        
         monster1 = Monster(player1)
         battle(monster1, player1, pack)
     elif departure == 2:
