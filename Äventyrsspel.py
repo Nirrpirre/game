@@ -14,6 +14,7 @@ class Monster:
         self.monster_strength = rand.randint(1, 10) + player1.level
         self.monster_health = rand.randint(1, 100) + player1.level
         self.monster = rand.choice(["Goblin", "Zombie", "Orc", "Pig", "Monkey"])
+        
 
 class Trap:
     def __init__(self, player1):
@@ -109,16 +110,16 @@ def battle(monster1, player1, pack):
         Action = input("Attack, Use Health potion, Flee?: ")
         if Action == "1":
             monster1.monster_health -= player1.strength
-            if monster1.monster_health <= 0:
+            if 0 <= monster1.monster_health:
                 monster1.monster_health == 0
             print(f"""
                     --{monster1.monster}--
-                    {monster1.monster} Strength: {monster1.monster_strength}
-                    {monster1.monster} Health:   {monster1.monster_health}
+                    {monster1.monster} Strength: {int(monster1.monster_strength)}
+                    {monster1.monster} Health:   {int(monster1.monster_health)}
 
                     --{player1.name}--
-                    {player1.name}  Strenght: {player1.strength}
-                    {player1.name}  Health:   {player1.hp}
+                    {player1.name}  Strenght: {int(player1.strength)}
+                    {player1.name}  Health:   {int(player1.hp)}
                     """)
             if monster1.monster_health <= 0:
                 player1.xp += 5
@@ -152,6 +153,7 @@ def travel(player1, trap, pack):
     departure = rand.randint(1, 3)
     chestitems = Items()
     if departure == 1:
+        
         monster1 = Monster(player1)
         battle(monster1, player1, pack)
     elif departure == 2:
