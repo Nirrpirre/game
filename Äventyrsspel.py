@@ -154,13 +154,15 @@ def travel(player1, trap, pack, monster1):
     departure = rand.randint(1, 3)
     chestitems = Items()
     if departure == 1:
-        print(rand.choice([f"""In the heart of the Whispering Woods, 
+        print(rand.choice([f"""
+                           In the heart of the Whispering Woods, 
                            where trees share secrets in hushed tones, 
                            a mysterious mist clings to the air. 
                            As you venture deeper, the ethereal whispers grow louder, 
                            weaving tales of ancient magic. Suddenly, 
                            the foliage shivers, and from the shadows emerges a fearsome --{monster1.monster}--.""", 
-                           f"""Beneath the moonlit graveyard lies a network of cursed crypts, 
+                           f"""
+                           Beneath the moonlit graveyard lies a network of cursed crypts, 
                            their stone doors sealed with ominous runes. 
                            As you explore the shadowy catacombs, 
                            whispers of long-forgotten souls fill the air. 
