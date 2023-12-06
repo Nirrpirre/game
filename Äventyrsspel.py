@@ -22,12 +22,12 @@ class Trap:
         self.trap_damage = rand.randint(player1.hp // 4, player1.hp // 2)
 
     def trigger(self, player1):
-        if self.trap_name == "Electric lake" or "Lava pool" or "Loot lake":
+        if self.trap_name == "Electric lake" or self.trap_name == "Lava pool" or self.trap_name == "Loot lake":
             print(f"""
         You fell into the {self.trap_name} and lost {self.trap_damage} hp""")
             player1.hp -= self.trap_damage
             print(f"Your hp is now {int(player1.hp)}")
-        elif self.trap_name == "Bear trap" or "Spike trap":
+        elif self.trap_name == "Bear trap" or self.trap_name == "Spike trap":
             print(f"""
         You triggered the {self.trap_name}!""")
             player1.hp -= self.trap_damage
@@ -39,12 +39,6 @@ class Trap:
             player1.hp -= self.trap_damage
             print(f"You lost {self.trap_damage} hp")
             print(f"Your hp is now {int(player1.hp)}")
-
-def display_stats(player1):
-    print(f"Health: {int(player1.hp)}")
-    print(f"Strength: {int(player1.strength)}")
-    print(f"Level: {player1.level}")
-    print(f"Xp: {player1.xp}")
 
 class Items:
     def __init__(self):
@@ -168,7 +162,7 @@ You do not have any health potions
                        ''')
 
 def travel(player1, trap, pack, monster1):
-    departure = rand.randint(1, 3)
+    departure = rand.randint(3, 3)
     chestitems = Items()
     if departure == 1:
         print(rand.choice([f"""
@@ -388,7 +382,7 @@ Your backpack is full. You cannot carry more items.
         while True:
             player_answer = input("""
 Guess a number between 1 and 4 to have a chance to escape!: """)
-            if player_answer == "1" or player_answer == "2" or player_answer == "3" or player_answer == "4":
+            if player_answer == "1" or player_answer == "2" or player_answer == "3":
                 break
         if player_answer == (right_answer):
             print(f"""
