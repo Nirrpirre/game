@@ -9,6 +9,7 @@ class Player:
         self.strength = 10
         self.level = 1
         self.xp = 0
+        
 class Monster:
     def __init__(self, player1):
         self.monster_strength = rand.randint(1, 10) + player1.level
@@ -189,7 +190,7 @@ def travel(player1, trap, pack, monster1):
         monster1 = Monster(player1)
         print("""
 Approaching...""")
-        time.sleep(1 )
+        time.sleep(1)
         if monster1.monster == ("Skeleton"):
             print(r'''
                                           __ _
