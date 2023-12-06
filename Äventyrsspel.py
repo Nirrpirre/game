@@ -160,14 +160,14 @@ def travel(player1, trap, pack, monster1):
                            a mysterious mist clings to the air. 
                            As you venture deeper, the ethereal whispers grow louder, 
                            weaving tales of ancient magic. Suddenly, 
-                           the foliage shivers, and from the shadows emerges a fearsome --{monster1.monster}--.""", 
+                           the foliage shivers, and from the shadows emerges a fearsome....""", 
                            f"""
                            Beneath the moonlit graveyard lies a network of cursed crypts, 
                            their stone doors sealed with ominous runes. 
                            As you explore the shadowy catacombs, 
                            whispers of long-forgotten souls fill the air. 
                            An ancient curse awakens, and the ground trembles. 
-                           From the darkness rises the --{monster1.monster}--, 
+                           From the darkness rises the, 
                            an undead behemoth with a hunger for the living."""]))
         input("Press enter to continue")
         monster1 = Monster(player1)
