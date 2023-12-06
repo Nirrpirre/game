@@ -1,7 +1,6 @@
 import random as rand
 import time
-#jief
-#fjiwf
+
 class Player:
     def __init__(self):
         self.name = ""
@@ -16,7 +15,6 @@ class Monster:
         self.monster_health = rand.randint(1, 100) + player1.level
         self.monster = rand.choice(["Goblin", "Zombie", "Ogre", "Pig", "Monkey", "Skeleton"])
         
-
 class Trap:
     def __init__(self, player1):
         self.trap_name = rand.choice(["Bear trap", "Spike trap", "Goblin gang", "Wolf pack", "Electric lake", "Lava pool", "Loot lake"])
@@ -106,8 +104,6 @@ def level_up(player1):
         print(f"""
 You leveled up to level {player1.level}!""")
         
-
-
 def battle(monster1, player1, pack):
     print(f'''
 You encountered a
@@ -169,7 +165,6 @@ Inventory: {pack}""")
                 print ('''
 You do not have any health potions
                        ''')
-
 
 def travel(player1, trap, pack, monster1):
     departure = rand.randint(1, 3)
@@ -381,7 +376,6 @@ Your strength increased by {round(chestitems.strength_bonus, 2) * 100}%""")
                 player1.hp *= (chestitems.hp_bonus + 1)
                 print(f"""
 Your health increased by {round(chestitems.hp_bonus, 2) * 100}%""")
-            
         else:
             print("""
 Your backpack is full. You cannot carry more items.
@@ -431,5 +425,4 @@ def main():
     monster1 = Monster(player1)
     intro(player1)
     menu(player1, monster1)
-
 main()
