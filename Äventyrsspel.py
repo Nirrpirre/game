@@ -142,9 +142,12 @@ You gained 5 experience""")
                 pack.remove ('Health potion')
                 print(f"""
 You used a health potion and recovered 20 hp
-Your hp is now: {player1.hp}""")
+Your hp is now: {player1.hp}
+Remaining items in your inventory: {pack}""")
             else:
-                print ('You do not have any health potions')
+                print ('''
+You do not have any health potions
+                       ''')
 
 
 def travel(player1, trap, pack, monster1):
@@ -156,16 +159,18 @@ def travel(player1, trap, pack, monster1):
                            a mysterious mist clings to the air. 
                            As you venture deeper, the ethereal whispers grow louder, 
                            weaving tales of ancient magic. Suddenly, 
-                           the foliage shivers, and from the shadows emerges a fearsome {monster1.monster}.""", 
-                           """Beneath the moonlit graveyard lies a network of cursed crypts, 
+                           the foliage shivers, and from the shadows emerges a fearsome --{monster1.monster}--.""", 
+                           f"""Beneath the moonlit graveyard lies a network of cursed crypts, 
                            their stone doors sealed with ominous runes. 
                            As you explore the shadowy catacombs, 
                            whispers of long-forgotten souls fill the air. 
                            An ancient curse awakens, and the ground trembles. 
-                           From the darkness rises the Tomb Guardian, 
+                           From the darkness rises the --{monster1.monster}--, 
                            an undead behemoth with a hunger for the living."""]))
+        input("Press enter to continue")
         monster1 = Monster(player1)
-        print("Traveling...")
+        print("""
+Traveling...""")
         time.sleep(1 )
         if monster1.monster == ("Skeleton"):
             print(r'''
@@ -339,11 +344,13 @@ def travel(player1, trap, pack, monster1):
 ''')
         battle(monster1, player1, pack)
     elif departure == 2:
-        print("You found a chest!")
+        print("""
+You found a chest!""")
         if len(pack) < 5:
             if chestitems.name == "longbow" or chestitems.name == "iron sword":
                 player1.strength *= (chestitems.strength_bonus + 1)
-                print(f"Your strength increased by {round(chestitems.strength_bonus, 2) * 100}%")
+                print(f"""
+Your strength increased by {round(chestitems.strength_bonus, 2) * 100}%""")
             elif chestitems.name == "iron armor" or chestitems.name == "iron shield":
                 player1.hp *= (chestitems.hp_bonus + 1)
                 print(f"""
@@ -353,17 +360,21 @@ You got a new {chestitems.name}""")
             pack.append(chestitems.name) 
         else:
             print("""
-Your backpack is full. You cannot carry more items.""")
+Your backpack is full. You cannot carry more items.
+                  """)
     elif departure == 3:
         rätt_svar = rand.randint(1,3)
-        print(f"You encountered a {trap.trap_name}")
+        print(f"""
+                You encountered a {trap.trap_name}""")
         while True:
             player_answer = input("""
 Guess a number between 1 and 4 to have a chance to escape!: """)
             if player_answer == "1" or player_answer == "2" or player_answer == "3" or player_answer == "4":
                 break
         if player_answer == (rätt_svar):
-            print("You avoided the trap and got away safely")
+            print("""
+You avoided the trap and got away safely
+                  """)
         elif player_answer != (rätt_svar):
             trap.trigger(player1)
 
@@ -388,7 +399,8 @@ Please enter your choice: """)
             print(backpack(pack))
     if player1.hp < 0:
         print("""
-You got killed, better luck next time.""")
+You got killed, better luck next time.
+              """)
 
 def main():
     player1 = Player()
