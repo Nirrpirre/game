@@ -19,19 +19,28 @@ class Monster:
 
 class Trap:
     def __init__(self, player1):
-        self.trap_name = rand.choice(["Bear trap", "Spike trap", "Electric lake", "Lava pool"])
+        self.trap_name = rand.choice(["Bear trap", "Spike trap", "Goblin gang", "Wolf pack", "Electric lake", "Lava pool", "Loot lake"])
         self.trap_damage = rand.randint(player1.hp // 4, player1.hp // 2)
 
     def trigger(self, player1):
-        if self.trap_name == "Electric lake" or "Lava pool":
+        if self.trap_name == "Electric lake" or "Lava pool" or "Loot lake":
             print(f"""
         You fell into the {self.trap_name}""")
-        else:
+            player1.hp -= self.trap_damage
+            print(f"You lost {self.trap_damage} hp")
+            print(f"Your hp is now {int(player1.hp)}")
+        elif self.trap_name == "Bear trap" or "Spike trap":
             print(f"""
         You triggered a {self.trap_name}!""")
-        player1.hp -= self.trap_damage
-        print(f"You lost {self.trap_damage} hp")
-        print(f"Your hp is now {int(player1.hp)}")
+            player1.hp -= self.trap_damage
+            print(f"You lost {self.trap_damage} hp")
+            print(f"Your hp is now {int(player1.hp)}")
+        else:
+            print(f"""
+        You ran into a {self.trap_name}""")
+            player1.hp -= self.trap_damage
+            print(f"You lost {self.trap_damage} hp")
+            print(f"Your hp is now {int(player1.hp)}")
 
 def display_stats(player1):
     print(f"Health: {int(player1.hp)}")
@@ -100,27 +109,38 @@ You leveled up to level {player1.level}!""")
 
 
 def battle(monster1, player1, pack):
-    print(f'You encountered a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
+    print(f'''
+You encountered a
+          
+                    --{monster1.monster}--
+    {monster1.monster} Strength: {int(monster1.monster_strength)}
+    {monster1.monster} Health:   {int(monster1.monster_health)}
+
+                    --{player1.name}--
+    {player1.name}  Strenght: {int(player1.strength)}
+    {player1.name}  Health:   {int(player1.hp)}    
+''')
+    
     while monster1.monster_health > 0 and player1.hp > 0:
-        print (f"{player1.name}s turn")
+        print (f"{player1.name}'s turn")
         print("""
-                1. Attack
-                2. Use Health potion
-                3. Flee
+                    1. Attack
+                    2. Use Health potion
+                    3. Flee
                                 """)
-        Action = input("Attack, Use Health potion, Flee?: ")
+        Action = input("What will you do?: ")
         if Action == "1":
             monster1.monster_health -= player1.strength
             if monster1.monster_health <= 0:
                 monster1.monster_health == 0
             print(f"""
                     --{monster1.monster}--
-                    {monster1.monster} Strength: {int(monster1.monster_strength)}
-                    {monster1.monster} Health:   {int(monster1.monster_health)}
+    {monster1.monster} Strength: {int(monster1.monster_strength)}
+    {monster1.monster} Health:   {int(monster1.monster_health)}
 
                     --{player1.name}--
-                    {player1.name}  Strenght: {int(player1.strength)}
-                    {player1.name}  Health:   {int(player1.hp)}
+    {player1.name}  Strenght: {int(player1.strength)}
+    {player1.name}  Health:   {int(player1.hp)}
                     """)
             if monster1.monster_health <= 0:
                 player1.xp += 5
@@ -142,8 +162,9 @@ You gained 5 experience""")
                 pack.remove ('Health potion')
                 print(f"""
 You used a health potion and recovered 20 hp
-Your hp is now: {player1.hp}
-Remaining items in your inventory: {pack}""")
+
+Your current HP is {int(player1.hp)}/{int(player1.max_hp)}
+Inventory: {pack}""")
             else:
                 print ('''
 You do not have any health potions
@@ -349,6 +370,9 @@ Approaching...""")
         print("""
 You found a chest!""")
         if len(pack) < 5:
+            print(f"""
+You got a new {chestitems.name}""")
+            pack.append(chestitems.name) 
             if chestitems.name == "longbow" or chestitems.name == "iron sword":
                 player1.strength *= (chestitems.strength_bonus + 1)
                 print(f"""
@@ -357,9 +381,7 @@ Your strength increased by {round(chestitems.strength_bonus, 2) * 100}%""")
                 player1.hp *= (chestitems.hp_bonus + 1)
                 print(f"""
 Your health increased by {round(chestitems.hp_bonus, 2) * 100}%""")
-            print(f"""
-You got a new {chestitems.name}""")
-            pack.append(chestitems.name) 
+            
         else:
             print("""
 Your backpack is full. You cannot carry more items.
@@ -387,7 +409,7 @@ def menu(player1, monster1):
     pack = []
     while player1.hp > 0:
         camp = input("""
-                1.  Begin your adventure
+                1.  Explore 
                 2.  Stats 
                 3.  Backpack 
 
