@@ -9,7 +9,7 @@ class Player:
         self.strength = 10
         self.level = 1
         self.xp = 0
-        
+
 class Monster:
     def __init__(self, player1):
         self.monster_strength = rand.randint(1, 10) + player1.level
@@ -24,19 +24,18 @@ class Trap:
     def trigger(self, player1):
         if self.trap_name == "Electric lake" or "Lava pool" or "Loot lake":
             print(f"""
-        You fell into the {self.trap_name}""")
+        You fell into the {self.trap_name} and lost {self.trap_damage} hp""")
             player1.hp -= self.trap_damage
-            print(f"You lost {self.trap_damage} hp")
             print(f"Your hp is now {int(player1.hp)}")
         elif self.trap_name == "Bear trap" or "Spike trap":
             print(f"""
-        You triggered a {self.trap_name}!""")
+        You triggered the {self.trap_name}!""")
             player1.hp -= self.trap_damage
             print(f"You lost {self.trap_damage} hp")
             print(f"Your hp is now {int(player1.hp)}")
         else:
             print(f"""
-        You ran into a {self.trap_name}""")
+        You got attacked by the {self.trap_name}""")
             player1.hp -= self.trap_damage
             print(f"You lost {self.trap_damage} hp")
             print(f"Your hp is now {int(player1.hp)}")
@@ -158,9 +157,10 @@ You gained 5 experience""")
                     player1.hp = player1.max_hp
                 pack.remove ('Health potion')
                 print(f"""
-You used a health potion and recovered 20 hp
+You used a Health potion and recovered 20 hp
 
 Your current HP is {int(player1.hp)}/{int(player1.max_hp)}
+
 Inventory: {pack}""")
             else:
                 print ('''
@@ -184,7 +184,7 @@ def travel(player1, trap, pack, monster1):
                            As you explore the shadowy catacombs, 
                            whispers of long-forgotten souls fill the air. 
                            An ancient curse awakens, and the ground trembles. 
-                           From the darkness rises the, 
+                           From the darkness rises the creature, 
                            an undead behemoth with a hunger for the living."""]))
         input("Press enter to continue")
         monster1 = Monster(player1)
@@ -382,7 +382,7 @@ Your health increased by {round(chestitems.hp_bonus, 2) * 100}%""")
 Your backpack is full. You cannot carry more items.
                   """)
     elif departure == 3:
-        rätt_svar = rand.randint(1,3)
+        right_answer = rand.randint(1,3)
         print(f"""
                 You encountered a {trap.trap_name}""")
         while True:
@@ -390,11 +390,11 @@ Your backpack is full. You cannot carry more items.
 Guess a number between 1 and 4 to have a chance to escape!: """)
             if player_answer == "1" or player_answer == "2" or player_answer == "3" or player_answer == "4":
                 break
-        if player_answer == (rätt_svar):
-            print("""
-You avoided the trap and got away safely
+        if player_answer == (right_answer):
+            print(f"""
+You avoided the {trap.name} and got away safely
                   """)
-        elif player_answer != (rätt_svar):
+        elif player_answer != (right_answer):
             trap.trigger(player1)
 
 def menu(player1, monster1):
