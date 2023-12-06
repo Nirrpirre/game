@@ -172,7 +172,7 @@ def travel(player1, trap, pack, monster1):
         input("Press enter to continue")
         monster1 = Monster(player1)
         print("""
-Traveling...""")
+Approaching...""")
         time.sleep(1 )
         if monster1.monster == ("Skeleton"):
             print(r'''
