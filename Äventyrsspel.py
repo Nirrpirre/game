@@ -1,15 +1,8 @@
 import random as rand
 import time
-import sys
 #jief
 #fjiwf
-
-def print_slow(string, tim):
-    for letter in string:
-        sys.stdout.write(letter)
-        sys.stdout.flush()
-        time.sleep(tim)
-
+#hdhwdi
 class Player:
     def __init__(self):
         self.name = ""
@@ -18,30 +11,43 @@ class Player:
         self.strength = 10
         self.level = 1
         self.xp = 0
+
 class Monster:
     def __init__(self, player1):
         self.monster_strength = rand.randint(1, 10) + player1.level
         self.monster_health = rand.randint(1, 100) + player1.level
         self.monster = rand.choice(["Goblin", "Zombie", "Ogre", "Pig", "Monkey", "Skeleton"])
         
-
 class Trap:
     def __init__(self, player1):
-        self.trap_name = rand.choice(["Bear trap", "Spike trap", "Electric lake", "Lava pool"])
+        self.trap_name = rand.choice(["Bear trap", "Spike trap", "Goblin gang", "Wolf pack", "Electric lake", "Lava pool", "Loot lake"])
         self.trap_damage = rand.randint(player1.hp // 4, player1.hp // 2)
     
 
     def trigger(self, player1):
-        if self.trap_name == "Electric lake" or "Lava pool":
+        if self.trap_name == "Electric lake" or self.trap_name == "Lava pool" or self.trap_name == "Loot lake":
             print(f"""
-        You fell into the {self.trap_name}""")
+        You fell into the {self.trap_name} and lost {self.trap_damage} hp""")
+            player1.hp -= self.trap_damage
+            print(f"Your hp is now {int(player1.hp)}")
+        elif self.trap_name == "Bear trap" or self.trap_name == "Spike trap":
+            print(f"""
+        You triggered the {self.trap_name}!""")
+            player1.hp -= self.trap_damage
+            print(f"You lost {self.trap_damage} hp")
+            print(f"Your hp is now {int(player1.hp)}")
         else:
             print(f"""
-        You triggered a {self.trap_name}!""")
-        player1.hp -= self.trap_damage
-        print(f"You lost {self.trap_damage} hp")
-        print(f"Your hp is now {int(player1.hp)}")
+        You got attacked by the {self.trap_name}""")
+            player1.hp -= self.trap_damage
+            print(f"You lost {self.trap_damage} hp")
+            print(f"Your hp is now {int(player1.hp)}")
 
+def display_stats(player1):
+    print(f"Health: {int(player1.hp)}")
+    print(f"Strength: {int(player1.strength)}")
+    print(f"Level: {player1.level}")
+    print(f"Xp: {player1.xp}")
 
 class Items:
     def __init__(self):
@@ -54,35 +60,47 @@ class Items:
             self.hp_bonus = rand.uniform(0.1, 0.2)
 
 def display_stats(player1):
-    print(f"Health: {int(player1.hp)}")
-    print(f"Strength: {int(player1.strength)}")
-    print(f"Level: {player1.level}")
-    print(f"Xp: {player1.xp}")
+    print(f"""
+ ___________________________
+|  _______________________  |
+ \ |                     | /               
+         Health: {int(player1.hp)}                    
+                            
+       Strenght: {int(player1.strength)}
+                           
+        Level: {player1.level}
+                           
+        xp: {player1.xp}/{(player1.level)*10}                
+_/ |_____________________| \_
+|___________________________|
+""")
 
 def intro(player1):
     player1.name = str(input("""
                     What is your name, adventurer?: """))
     
-    if input("Enter 1 to read the story or any other key to continue with the adventure: ") == "1":
-        print("""
-    In the forsaken realm of Eldrath, 
-    a once-prosperous kingdom now teeters on the edge of darkness. 
-    A sinister portal has unleashed a horde of nightmarish monsters, 
-    terrorizing the land and plunging it into chaos. 
-    As the last descendant of an ancient monster-slaying lineage, 
-    you emerge as the kingdom's reluctant savior.
-
-    Will you rise as the hero Eldrath needs, 
-    purging the land of its monstrous scourge, 
-    or succumb to the relentless darkness that threatens to consume all? 
-    The battle against the monsters has begun, 
-    and only YOU can decide the kingdom's ultimate destiny.
-          
-    We believe in you, our hero!
-\n""")
-    else:
-        print(f"""
-                    I understand {player1.name}, maybe another time""")
+    print(f"""
+  _____________________________________          
+ / \                                   \.
+| O | In the forsaken realm of Eldrath, |.
+ \_ | A once-prosperous kingdom,        |.
+    | Now teeters on the edge,          |.
+    | Of darkness.                      |.
+    |                                   |.
+    | A sinister portal has unleashed,  |.
+    | A horde of nightmarish monsters,  |.
+    | Terrorizing the land and          |.
+    | Plunging it into chaos.           |.
+    |                                   |.
+    | Will you rise as the hero,        |.
+    | Eldrath needs, only YOU can       |.
+    | decide the kingdom's ultimate     |.
+    | Destiny, We believe in you Hero!  |.
+    |   ________________________________|___
+    |  /      Sincerely, King Fabian VI    /.
+    \_/___________________________________/.
+""")
+    input("Press Enter To Continue")
 
 def backpack(pack):
     if not pack:
@@ -101,27 +119,42 @@ def level_up(player1):
         print(f"""
 You leveled up to level {player1.level}!""")
         
-
-
 def battle(monster1, player1, pack):
-    print(f'You encountered a \n--{monster1.monster}--\nstrength: {monster1.monster_strength}\nHealth: {monster1.monster_health}')
+    print(f'''
+You encountered a
+          
+                    --{monster1.monster}--
+    {monster1.monster} Strength: {int(monster1.monster_strength)}
+    {monster1.monster} Health:   {int(monster1.monster_health)}
+
+                    --{player1.name}--
+    {player1.name}  Strenght: {int(player1.strength)}
+    {player1.name}  Health:   {int(player1.hp)}    
+''')
+    
     while monster1.monster_health > 0 and player1.hp > 0:
-        print (f"{player1.name}s turn")
+        print (f"{player1.name}'s turn")
         print("""
-                1. Attack
-                2. Use Health potion
-                3. Flee
+                    1. Attack
+                    2. Use Health potion
+                    3. Flee
                                 """)
-        Action = input("Attack, Use Health potion, Flee?: ")
+        Action = input("What will you do?: ")
         if Action == "1":
             print("Attacking...")
             time.sleep(1)
             monster1.monster_health -= player1.strength
-            print_slow(f"""
---{monster1.monster}--
-{monster1.monster} Strength: {int(monster1.monster_strength)}
-{monster1.monster} Health:   {int(monster1.monster_health)}
-""", 0.04)
+            if monster1.monster_health <= 0:
+                monster1.monster_health == 0
+            print(f"""
+                    --{monster1.monster}--
+                    {monster1.monster} Strength: {int(monster1.monster_strength)}
+                    {monster1.monster} Health:   {int(monster1.monster_health)}
+
+                    --{player1.name}--
+                    {player1.name}  Strenght: {int(player1.strength)}
+                    {player1.name}  Health:   {int(player1.hp)}
+                    """)
             if monster1.monster_health <= 0:
                 player1.xp += 5
                 print_slow(f"""
@@ -149,17 +182,18 @@ You gained 5 experience""", 0.04)
                     player1.hp = player1.max_hp
                 pack.remove ('Health potion')
                 print(f"""
-You used a health potion and recovered 20 hp
-Your hp is now: {player1.hp}
-Remaining items in your inventory: {pack}""")
+You used a Health potion and recovered 20 hp
+
+Your current HP is {int(player1.hp)}/{int(player1.max_hp)}
+
+Inventory: {pack}""")
             else:
                 print ('''
 You do not have any health potions
                        ''')
 
-
 def travel(player1, trap, pack, monster1):
-    departure = rand.randint(1, 3)
+    departure = rand.randint(3, 3)
     chestitems = Items()
     if departure == 1:
         print(rand.choice([f"""
@@ -175,13 +209,13 @@ def travel(player1, trap, pack, monster1):
                            As you explore the shadowy catacombs, 
                            whispers of long-forgotten souls fill the air. 
                            An ancient curse awakens, and the ground trembles. 
-                           From the darkness rises the, 
+                           From the darkness rises the creature, 
                            an undead behemoth with a hunger for the living."""]))
-        input("Press enter to continue")
+        input("Press Enter To Continue")
         monster1 = Monster(player1)
         print("""
 Approaching...""")
-        time.sleep(1 )
+        time.sleep(1)
         if monster1.monster == ("Skeleton"):
             print(r'''
                                           __ _
@@ -357,6 +391,9 @@ Approaching...""")
         print("""
 You found a chest!""")
         if len(pack) < 5:
+            print(f"""
+You got a new {chestitems.name}""")
+            pack.append(chestitems.name) 
             if chestitems.name == "longbow" or chestitems.name == "iron sword":
                 player1.strength *= (chestitems.strength_bonus + 1)
                 print(f"""
@@ -365,41 +402,48 @@ Your strength increased by {round(chestitems.strength_bonus, 2) * 100}%""")
                 player1.hp *= (chestitems.hp_bonus + 1)
                 print(f"""
 Your health increased by {round(chestitems.hp_bonus, 2) * 100}%""")
-            print(f"""
-You got a new {chestitems.name}""")
-            pack.append(chestitems.name) 
         else:
             print("""
 Your backpack is full. You cannot carry more items.
                   """)
     elif departure == 3:
-        rätt_svar = rand.randint(1,3)
+        right_answer = 3
         print(f"""
                 You encountered a {trap.trap_name}""")
         while True:
-            player_answer = input("""
-Guess a number between 1 and 4 to have a chance to escape!: """)
-            if player_answer == "1" or player_answer == "2" or player_answer == "3" or player_answer == "4":
+            player_answer = input("Guess a number between 1 and 3 to have a chance to escape!: ")
+            if player_answer == "1" or player_answer == "2" or player_answer == "3":
                 break
-        if player_answer == (rätt_svar):
-            print("""
-You avoided the trap and got away safely
+        if player_answer == right_answer:
+            print(f"""
+You avoided the {trap.trap_name} and got away safely
                   """)
-        elif player_answer != (rätt_svar):
+        elif player_answer != right_answer:
             trap.trigger(player1)
 
+
 def menu(player1, monster1):
-    print("""
-            *********Welcome to The Dark Dungeons*********
+    print("""                         
+,--.   ,--.      ,--.                                  ,--.             ,--------.,--.                 
+|  |   |  |,---. |  |,---. ,---. ,--,--,--.,---.     ,-'  '-. ,---.     '--.  .--'|  ,---. ,---.       
+|  |.'.|  | .-. :|  | .--'| .-. ||        | .-. :    '-.  .-'| .-. |       |  |   |  .-.  | .-. :      
+|   ,'.   \   --.|  \ `--.' '-' '|  |  |  \   --.      |  |  ' '-' '       |  |   |  | |  \   --.      
+'--'   '--'`----'`--'`---' `---' `--`--`--'`----'      `--'   `---'        `--'   `--' `--'`----'      
+,------.                 ,--.        ,------.                                                          
+|  .-.  \  ,--,--.,--.--.|  |,-.     |  .-.  \ ,--.,--.,--,--,  ,---.  ,---.  ,---. ,--,--,  ,---.     
+|  |  \  :' ,-.  ||  .--'|     /     |  |  \  :|  ||  ||      \| .-. || .-. :| .-. ||      \(  .-'     
+|  '--'  /\ '-'  ||  |   |  \  \     |  '--'  /'  ''  '|  ||  |' '-' '\   --.' '-' '|  ||  |.-'  `)    
+`-------'  `--`--'`--'   `--'`--'    `-------'  `----' `--''--'.`-  /  `----' `---' `--''--'`----' 
+                                                               `---'
           """)
     pack = []
     while player1.hp > 0:
         camp = input("""
-                1.  Begin your adventure
+                1.  Explore 
                 2.  Stats 
                 3.  Backpack 
 
-Please enter your choice: """)
+Please Enter Your Choice: """)
         if camp == "1":
             trap = Trap(player1)
             travel(player1, trap, pack, monster1)
@@ -417,5 +461,4 @@ def main():
     monster1 = Monster(player1)
     intro(player1)
     menu(player1, monster1)
-
 main()
