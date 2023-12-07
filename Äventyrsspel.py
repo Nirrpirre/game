@@ -1,7 +1,7 @@
 import random as rand
 import time
 import sys
-
+#osadh
 def print_slow(string, tim):
     for letter in string:
         sys.stdout.write(letter)
