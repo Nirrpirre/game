@@ -1,6 +1,12 @@
 import random as rand
 import time
 
+def print_slow(string, tim):
+    for letter in string:
+        sys.stdout.write(letter)
+        sys.stdout.flush()
+        time.sleep(tim)
+
 class Player:
     def __init__(self):
         self.name = ""
