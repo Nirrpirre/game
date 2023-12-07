@@ -1,7 +1,15 @@
 import random as rand
 import time
+import sys
 #jief
 #fjiwf
+
+def print_slow(string, tim):
+    for letter in string:
+        sys.stdout.write(letter)
+        sys.stdout.flush()
+        time.sleep(tim)
+
 class Player:
     def __init__(self):
         self.name = ""
@@ -21,6 +29,7 @@ class Trap:
     def __init__(self, player1):
         self.trap_name = rand.choice(["Bear trap", "Spike trap", "Electric lake", "Lava pool"])
         self.trap_damage = rand.randint(player1.hp // 4, player1.hp // 2)
+    
 
     def trigger(self, player1):
         if self.trap_name == "Electric lake" or "Lava pool":
@@ -33,11 +42,6 @@ class Trap:
         print(f"You lost {self.trap_damage} hp")
         print(f"Your hp is now {int(player1.hp)}")
 
-def display_stats(player1):
-    print(f"Health: {int(player1.hp)}")
-    print(f"Strength: {int(player1.strength)}")
-    print(f"Level: {player1.level}")
-    print(f"Xp: {player1.xp}")
 
 class Items:
     def __init__(self):
@@ -110,27 +114,31 @@ def battle(monster1, player1, pack):
                                 """)
         Action = input("Attack, Use Health potion, Flee?: ")
         if Action == "1":
+            print("Attacking...")
+            time.sleep(1)
             monster1.monster_health -= player1.strength
-            if monster1.monster_health <= 0:
-                monster1.monster_health == 0
-            print(f"""
-                    --{monster1.monster}--
-                    {monster1.monster} Strength: {int(monster1.monster_strength)}
-                    {monster1.monster} Health:   {int(monster1.monster_health)}
-
-                    --{player1.name}--
-                    {player1.name}  Strenght: {int(player1.strength)}
-                    {player1.name}  Health:   {int(player1.hp)}
-                    """)
+            print_slow(f"""
+--{monster1.monster}--
+{monster1.monster} Strength: {int(monster1.monster_strength)}
+{monster1.monster} Health:   {int(monster1.monster_health)}
+""", 0.04)
             if monster1.monster_health <= 0:
                 player1.xp += 5
-                print(f"""
+                print_slow(f"""
 You killed the {monster1.monster}
-You gained 5 experience""")
+You gained 5 experience""", 0.04)
                 level_up(player1)
                 break
             else:
+                print()
+                print(f"{monster1.monster} attacking...")
+                time.sleep(1)
                 player1.hp -= monster1.monster_strength
+                print(f"""
+--{player1.name}--
+{player1.name}  Strenght: {int(player1.strength)}
+{player1.name}  Health:   {int(player1.hp)}
+                    """)
         elif Action == "3":
             print("You fled")
             break
