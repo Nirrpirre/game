@@ -77,7 +77,8 @@ def intro(player1):
  \_ | A once-prosperous kingdom,        |.
     | Now teeters on the edge,          |.
     | Of darkness.                      |.
-    |  A sinister portal has unleashed, |.
+    |                                   |.
+    | A sinister portal has unleashed,  |.
     | A horde of nightmarish monsters,  |.
     | Terrorizing the land and          |.
     | Plunging it into chaos.           |.
@@ -173,7 +174,7 @@ You do not have any health potions
                        ''')
 
 def travel(player1, trap, pack, monster1):
-    departure = rand.randint(1, 3)
+    departure = rand.randint(3, 3)
     chestitems = Items()
     if departure == 1:
         print(rand.choice([f"""
@@ -387,20 +388,20 @@ Your health increased by {round(chestitems.hp_bonus, 2) * 100}%""")
 Your backpack is full. You cannot carry more items.
                   """)
     elif departure == 3:
-        right_answer = rand.randint(1,3)
+        right_answer = 3
         print(f"""
                 You encountered a {trap.trap_name}""")
         while True:
-            player_answer = input("""
-Guess a number between 1 and 4 to have a chance to escape!: """)
+            player_answer = input("Guess a number between 1 and 3 to have a chance to escape!: ")
             if player_answer == "1" or player_answer == "2" or player_answer == "3":
                 break
-        if player_answer == (right_answer):
+        if player_answer == right_answer:
             print(f"""
-You avoided the {trap.name} and got away safely
+You avoided the {trap.trap_name} and got away safely
                   """)
-        elif player_answer != (right_answer):
+        elif player_answer != right_answer:
             trap.trigger(player1)
+
 
 def menu(player1, monster1):
     print("""                         
