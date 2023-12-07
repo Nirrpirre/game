@@ -1,5 +1,6 @@
 import random as rand
 import time
+import sys
 
 def print_slow(string, tim):
     for letter in string:
