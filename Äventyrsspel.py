@@ -61,17 +61,22 @@ def display_stats(player1):
     print(f"""
  ___________________________
 |  _______________________  |
- \ |                     | /               
-         Health: {int(player1.hp)}                    
-                            
+ \ |                     | / """)              
+    print_slow(f"""
+         Health: {int(player1.hp)}
+""", 0.04)                         
+    print_slow(f"""
        Strenght: {int(player1.strength)}
-                           
-        Level: {player1.level}
-                           
-        xp: {player1.xp}/{(player1.level)*10}                
+""", 0.04)                        
+    print_slow(f"""
+          Level: {player1.level}
+""", 0.04)                       
+    print_slow(f"""
+             xp: {player1.xp}/{(player1.level)*10}
+""", 0.04)   
+    print("""                    
 _/ |_____________________| \_
-|___________________________|
-""")
+|___________________________|""")
 
 def intro(player1):
     player1.name = str(input("""
