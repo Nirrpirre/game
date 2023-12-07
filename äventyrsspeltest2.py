@@ -51,35 +51,47 @@ class Items:
             self.hp_bonus = rand.uniform(0.1, 0.2)
 
 def display_stats(player1):
-    print(f"Health: {int(player1.hp)}")
-    print(f"Strength: {int(player1.strength)}")
-    print(f"Level: {player1.level}")
-    print(f"Xp: {player1.xp}")
+    print(f"""
+ ___________________________
+|  _______________________  |
+ \ |                     | /               
+         Health: {int(player1.hp)}                    
+                            
+       Strenght: {int(player1.strength)}
+                           
+        Level: {player1.level}
+                           
+        xp: {player1.xp}/{(player1.level)*10}                
+_/ |_____________________| \_
+|___________________________|
+""")
 
 def intro(player1):
     player1.name = str(input("""
                     What is your name, adventurer?: """))
     
-    if input("Enter 1 to read the story or any other key to continue with the adventure: ") == "1":
-        print("""
-    In the forsaken realm of Eldrath, 
-    a once-prosperous kingdom now teeters on the edge of darkness. 
-    A sinister portal has unleashed a horde of nightmarish monsters, 
-    terrorizing the land and plunging it into chaos. 
-    As the last descendant of an ancient monster-slaying lineage, 
-    you emerge as the kingdom's reluctant savior.
-
-    Will you rise as the hero Eldrath needs, 
-    purging the land of its monstrous scourge, 
-    or succumb to the relentless darkness that threatens to consume all? 
-    The battle against the monsters has begun, 
-    and only YOU can decide the kingdom's ultimate destiny.
-          
-    We believe in you, our hero!
-\n""")
-    else:
-        print(f"""
-                    I understand {player1.name}, maybe another time""")
+    print(f"""
+  _____________________________________          
+ / \                                   \.
+| O | In the forsaken realm of Eldrath, |.
+ \_ | A once-prosperous kingdom,        |.
+    | Now teeters on the edge,          |.
+    | Of darkness.                      |.
+    |                                   |.
+    | A sinister portal has unleashed,  |.
+    | A horde of nightmarish monsters,  |.
+    | Terrorizing the land and          |.
+    | Plunging it into chaos.           |.
+    |                                   |.
+    | Will you rise as the hero,        |.
+    | Eldrath needs, only YOU can       |.
+    | decide the kingdom's ultimate     |.
+    | Destiny, We believe in you Hero!  |.
+    |   ________________________________|___
+    |  /      Sincerely, King Fabian VI    /.
+    \_/___________________________________/.
+""")
+    input("Press Enter To Continue")
 
 def backpack(pack):
     if not pack:
@@ -180,7 +192,7 @@ def travel(player1, trap, pack, monster1):
                            An ancient curse awakens, and the ground trembles. 
                            From the darkness rises the creature, 
                            an undead behemoth with a hunger for the living."""]))
-        input("Press enter to continue")
+        input("Press Enter To Continue")
         monster1 = Monster(player1)
         print("""
 Approaching...""")
@@ -376,24 +388,34 @@ Your health increased by {round(chestitems.hp_bonus, 2) * 100}%""")
 Your backpack is full. You cannot carry more items.
                   """)
     elif departure == 3:
-        right_answer = rand.randint(1,3)
+        right_answer = 3
         print(f"""
                 You encountered a {trap.trap_name}""")
         while True:
-            player_answer = input("""
-Guess a number between 1 and 4 to have a chance to escape!: """)
+            player_answer = input("Guess a number between 1 and 3 to have a chance to escape!: ")
             if player_answer == "1" or player_answer == "2" or player_answer == "3":
                 break
-        if player_answer == (right_answer):
+        if player_answer == right_answer:
             print(f"""
-You avoided the {trap.name} and got away safely
+You avoided the {trap.trap_name} and got away safely
                   """)
-        elif player_answer != (right_answer):
+        elif player_answer != right_answer:
             trap.trigger(player1)
 
+
 def menu(player1, monster1):
-    print("""
-            *********Welcome to The Dark Dungeons*********
+    print("""                         
+,--.   ,--.      ,--.                                  ,--.             ,--------.,--.                 
+|  |   |  |,---. |  |,---. ,---. ,--,--,--.,---.     ,-'  '-. ,---.     '--.  .--'|  ,---. ,---.       
+|  |.'.|  | .-. :|  | .--'| .-. ||        | .-. :    '-.  .-'| .-. |       |  |   |  .-.  | .-. :      
+|   ,'.   \   --.|  \ `--.' '-' '|  |  |  \   --.      |  |  ' '-' '       |  |   |  | |  \   --.      
+'--'   '--'`----'`--'`---' `---' `--`--`--'`----'      `--'   `---'        `--'   `--' `--'`----'      
+,------.                 ,--.        ,------.                                                          
+|  .-.  \  ,--,--.,--.--.|  |,-.     |  .-.  \ ,--.,--.,--,--,  ,---.  ,---.  ,---. ,--,--,  ,---.     
+|  |  \  :' ,-.  ||  .--'|     /     |  |  \  :|  ||  ||      \| .-. || .-. :| .-. ||      \(  .-'     
+|  '--'  /\ '-'  ||  |   |  \  \     |  '--'  /'  ''  '|  ||  |' '-' '\   --.' '-' '|  ||  |.-'  `)    
+`-------'  `--`--'`--'   `--'`--'    `-------'  `----' `--''--'.`-  /  `----' `---' `--''--'`----' 
+                                                               `---'
           """)
     pack = []
     while player1.hp > 0:
@@ -402,7 +424,7 @@ def menu(player1, monster1):
                 2.  Stats 
                 3.  Backpack 
 
-Please enter your choice: """)
+Please Enter Your Choice: """)
         if camp == "1":
             trap = Trap(player1)
             travel(player1, trap, pack, monster1)
