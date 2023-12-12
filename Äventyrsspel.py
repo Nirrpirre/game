@@ -1,7 +1,10 @@
 import random as rand
 import time
 import sys
-#osadh
+import pickle
+
+
+
 def print_slow(string, tim):
     for letter in string:
         sys.stdout.write(letter)
@@ -19,7 +22,7 @@ class Player:
 
 class Monster:
     def __init__(self, player1):
-        self.monster_strength = rand.randint(1, 10) + player1.level
+        self.monster_strength = rand.randint(91, 100) + player1.level
         self.monster_health = rand.randint(1, 100) + player1.level
         self.monster = rand.choice(["Goblin", "Zombie", "Ogre", "Pig", "Monkey", "Skeleton"])
         
@@ -64,16 +67,16 @@ def display_stats(player1):
  \ |                     | / """)              
     print_slow(f"""
          Health: {int(player1.hp)}
-""", 0.04)                         
+""", 0.03)                         
     print_slow(f"""
        Strenght: {int(player1.strength)}
-""", 0.04)                        
+""", 0.03)                        
     print_slow(f"""
           Level: {player1.level}
-""", 0.04)                       
+""", 0.03)                       
     print_slow(f"""
-             xp: {player1.xp}/{(player1.level)*10}
-""", 0.04)   
+          xp: {player1.xp}/{(player1.level)*10}
+""", 0.03)   
     print("""                    
 _/ |_____________________| \_
 |___________________________|""")
@@ -82,7 +85,7 @@ def intro(player1):
     player1.name = str(input("""
                     What is your name, adventurer?: """))
     
-    print(f"""
+    print_slow(f"""
   _____________________________________          
  / \                                   \.
 | O | In the forsaken realm of Eldrath, |.
@@ -102,7 +105,7 @@ def intro(player1):
     |   ________________________________|___
     |  /      Sincerely, King Fabian VI    /.
     \_/___________________________________/.
-""")
+""", 0.005)
     input("Press Enter To Continue")
 
 def backpack(pack):
@@ -136,26 +139,24 @@ You encountered a
 ''')
     
     while monster1.monster_health > 0 and player1.hp > 0:
-        print (f"{player1.name}'s turn")
-        print("""
+        print (f"\n{player1.name}'s turn")
+        print_slow("""
                     1. Attack
                     2. Use Health potion
                     3. Flee
-                                """)
+                                """, 0.02)
         Action = input("What will you do?: ")
         if Action == "1":
+            print("Attacking...")
+            time.sleep(1)
             monster1.monster_health -= player1.strength
             if monster1.monster_health <= 0:
                 monster1.monster_health == 0
-            print(f"""
+            print_slow(f"""
                     --{monster1.monster}--
     {monster1.monster} Strength: {int(monster1.monster_strength)}
     {monster1.monster} Health:   {int(monster1.monster_health)}
-
-                    --{player1.name}--
-    {player1.name}  Strenght: {int(player1.strength)}
-    {player1.name}  Health:   {int(player1.hp)}
-                    """)
+                    """, 0.02)
             if monster1.monster_health <= 0:
                 player1.xp += 5
                 print(f"""
@@ -164,7 +165,15 @@ You gained 5 experience""")
                 level_up(player1)
                 break
             else:
+                print()
+                print(f"{monster1.monster} attacking...")
+                time.sleep(1)
                 player1.hp -= monster1.monster_strength
+                print_slow(f"""
+                    --{player1.name}--
+    {player1.name}  Strenght: {int(player1.strength)}
+    {player1.name}  Health:   {int(player1.hp)}
+                    """, 0.02)
         elif Action == "3":
             print("You fled")
             break
@@ -186,7 +195,7 @@ You do not have any health potions
                        ''')
 
 def travel(player1, trap, pack, monster1):
-    departure = rand.randint(3, 3)
+    departure = rand.randint(1, 3)
     chestitems = Items()
     if departure == 1:
         print(rand.choice([f"""
@@ -415,8 +424,9 @@ You avoided the {trap.trap_name} and got away safely
             trap.trigger(player1)
 
 
+
 def menu(player1, monster1):
-    print("""                         
+    print_slow("""                         
 ,--.   ,--.      ,--.                                  ,--.             ,--------.,--.                 
 |  |   |  |,---. |  |,---. ,---. ,--,--,--.,---.     ,-'  '-. ,---.     '--.  .--'|  ,---. ,---.       
 |  |.'.|  | .-. :|  | .--'| .-. ||        | .-. :    '-.  .-'| .-. |       |  |   |  .-.  | .-. :      
@@ -428,15 +438,16 @@ def menu(player1, monster1):
 |  '--'  /\ '-'  ||  |   |  \  \     |  '--'  /'  ''  '|  ||  |' '-' '\   --.' '-' '|  ||  |.-'  `)    
 `-------'  `--`--'`--'   `--'`--'    `-------'  `----' `--''--'.`-  /  `----' `---' `--''--'`----' 
                                                                `---'
-          """)
+          """, 0.001)
     pack = []
     while player1.hp > 0:
-        camp = input("""
-                1.  Explore 
-                2.  Stats 
-                3.  Backpack 
+        print_slow("""
+        1.  Explore 
+        2.  Stats 
+        3.  Backpack 
 
-Please Enter Your Choice: """)
+        Please Enter Your Choice: """, 0.02)
+        camp = input ('')
         if camp == "1":
             trap = Trap(player1)
             travel(player1, trap, pack, monster1)
