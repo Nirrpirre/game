@@ -1,7 +1,6 @@
 import random as rand
 import time
 import sys
-import pickle
 
 
 
@@ -22,7 +21,7 @@ class Player:
 
 class Monster:
     def __init__(self, player1):
-        self.monster_strength = rand.randint(91, 100) + player1.level
+        self.monster_strength = rand.randint(1, 20) + player1.level
         self.monster_health = rand.randint(1, 100) + player1.level
         self.monster = rand.choice(["Goblin", "Zombie", "Ogre", "Pig", "Monkey", "Skeleton"])
         
@@ -85,7 +84,7 @@ def intro(player1):
     player1.name = str(input("""
                     What is your name, adventurer?: """))
     
-    print(f"""
+    print_slow(f"""
   _____________________________________          
  / \                                   \.
 | O | In the forsaken realm of Eldrath, |.
@@ -105,7 +104,7 @@ def intro(player1):
     |   ________________________________|___
     |  /      Sincerely, King Fabian VI    /.
     \_/___________________________________/.
-""")
+""", 0.004)
     input("Press Enter To Continue")
 
 def backpack(pack):
@@ -429,7 +428,7 @@ You avoided the {trap.trap_name} and got away safely
 
 
 def menu(player1, monster1):
-    print("""                         
+    print_slow("""                         
 ,--.   ,--.      ,--.                                  ,--.             ,--------.,--.                 
 |  |   |  |,---. |  |,---. ,---. ,--,--,--.,---.     ,-'  '-. ,---.     '--.  .--'|  ,---. ,---.       
 |  |.'.|  | .-. :|  | .--'| .-. ||        | .-. :    '-.  .-'| .-. |       |  |   |  .-.  | .-. :      
@@ -441,7 +440,7 @@ def menu(player1, monster1):
 |  '--'  /\ '-'  ||  |   |  \  \     |  '--'  /'  ''  '|  ||  |' '-' '\   --.' '-' '|  ||  |.-'  `)    
 `-------'  `--`--'`--'   `--'`--'    `-------'  `----' `--''--'.`-  /  `----' `---' `--''--'`----' 
                                                                `---'
-          """)
+          """, 0.001)
     pack = []
     while player1.hp > 0:
         print_slow("""
