@@ -85,7 +85,7 @@ def intro(player1):
     player1.name = str(input("""
                     What is your name, adventurer?: """))
     
-    print_slow(f"""
+    print(f"""
   _____________________________________          
  / \                                   \.
 | O | In the forsaken realm of Eldrath, |.
@@ -105,7 +105,7 @@ def intro(player1):
     |   ________________________________|___
     |  /      Sincerely, King Fabian VI    /.
     \_/___________________________________/.
-""", 0.005)
+""")
     input("Press Enter To Continue")
 
 def backpack(pack):
@@ -161,6 +161,7 @@ You encountered a
                 player1.xp += 5
                 print(f"""
 You killed the {monster1.monster}
+
 You gained 5 experience""")
                 level_up(player1)
                 break
@@ -175,7 +176,8 @@ You gained 5 experience""")
     {player1.name}  Health:   {int(player1.hp)}
                     """, 0.02)
         elif Action == "3":
-            print("You fled")
+            print("""
+You fled""")
             break
         elif Action == "2":
             if "Health potion" in pack:
@@ -199,24 +201,25 @@ def travel(player1, trap, pack, monster1):
     chestitems = Items()
     if departure == 1:
         print(rand.choice([f"""
-                           In the heart of the Whispering Woods, 
-                           where trees share secrets in hushed tones, 
-                           a mysterious mist clings to the air. 
-                           As you venture deeper, the ethereal whispers grow louder, 
-                           weaving tales of ancient magic. Suddenly, 
-                           the foliage shivers, and from the shadows emerges a fearsome....""", 
+                    In the heart of the Whispering Woods, 
+                    where trees share secrets in hushed tones, 
+                    a mysterious mist clings to the air. 
+                    As you venture deeper, the ethereal whispers grow louder, 
+                    weaving tales of ancient magic. Suddenly, 
+                    the foliage shivers, and from the shadows emerges a fearsome....""", 
                            f"""
-                           Beneath the moonlit graveyard lies a network of cursed crypts, 
-                           their stone doors sealed with ominous runes. 
-                           As you explore the shadowy catacombs, 
-                           whispers of long-forgotten souls fill the air. 
-                           An ancient curse awakens, and the ground trembles. 
-                           From the darkness rises the creature, 
-                           an undead behemoth with a hunger for the living."""]))
-        input("Press Enter To Continue")
+                    Beneath the moonlit graveyard lies a network of cursed crypts, 
+                    their stone doors sealed with ominous runes. 
+                    As you explore the shadowy catacombs, 
+                    whispers of long-forgotten souls fill the air. 
+                    An ancient curse awakens, and the ground trembles. 
+                    From the darkness rises the creature, 
+                    an undead behemoth with a hunger for the living."""]))
+        input("""
+                    Press Enter To Continue""")
         monster1 = Monster(player1)
         print("""
-Approaching...""")
+                    Approaching...""")
         time.sleep(1)
         if monster1.monster == ("Skeleton"):
             print(r'''
@@ -409,9 +412,9 @@ Your health increased by {round(chestitems.hp_bonus, 2) * 100}%""")
 Your backpack is full. You cannot carry more items.
                   """)
     elif departure == 3:
-        right_answer = 3
+        right_answer = "1"
         print(f"""
-                You encountered a {trap.trap_name}""")
+You encountered a {trap.trap_name}""")
         while True:
             player_answer = input("Guess a number between 1 and 3 to have a chance to escape!: ")
             if player_answer == "1" or player_answer == "2" or player_answer == "3":
@@ -426,7 +429,7 @@ You avoided the {trap.trap_name} and got away safely
 
 
 def menu(player1, monster1):
-    print_slow("""                         
+    print("""                         
 ,--.   ,--.      ,--.                                  ,--.             ,--------.,--.                 
 |  |   |  |,---. |  |,---. ,---. ,--,--,--.,---.     ,-'  '-. ,---.     '--.  .--'|  ,---. ,---.       
 |  |.'.|  | .-. :|  | .--'| .-. ||        | .-. :    '-.  .-'| .-. |       |  |   |  .-.  | .-. :      
@@ -438,7 +441,7 @@ def menu(player1, monster1):
 |  '--'  /\ '-'  ||  |   |  \  \     |  '--'  /'  ''  '|  ||  |' '-' '\   --.' '-' '|  ||  |.-'  `)    
 `-------'  `--`--'`--'   `--'`--'    `-------'  `----' `--''--'.`-  /  `----' `---' `--''--'`----' 
                                                                `---'
-          """, 0.001)
+          """)
     pack = []
     while player1.hp > 0:
         print_slow("""
