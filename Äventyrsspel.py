@@ -2,14 +2,6 @@ import random as rand
 import time
 import sys
 
-
-
-def print_slow(string, tim):
-    for letter in string:
-        sys.stdout.write(letter)
-        sys.stdout.flush()
-        time.sleep(tim)
-
 class Player:
     def __init__(self):
         self.name = ""
@@ -59,6 +51,12 @@ class Items:
         elif self.name == "iron armor" or self.name == "iron shield":
             self.hp_bonus = rand.uniform(0.1, 0.2)
 
+def print_slow(string, tim):
+    for letter in string:
+        sys.stdout.write(letter)
+        sys.stdout.flush()
+        time.sleep(tim)
+
 def display_stats(player1):
     print(f"""
  ___________________________
@@ -105,7 +103,8 @@ def intro(player1):
     |  /      Sincerely, King Fabian VI    /.
     \_/___________________________________/.
 """, 0.004)
-    input("Press Enter To Continue")
+    input("""
+          Press Enter To Continue""")
 
 def backpack(pack):
     if not pack:
