@@ -415,7 +415,8 @@ But your backpack is full.
                 print(f"""
 Would you like to delete an item to carry the {chestitems.name}?
 1. Yes
-2. No""")
+2. No
+""")
                 response3 = input("")
                 if response3 == "1":
                     response4 = ""
