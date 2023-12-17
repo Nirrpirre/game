@@ -159,7 +159,6 @@ def level_up(player1):
         print(f"You leveled up to level {player1.level}!\n")
         
 def battle(monster1, player1, pack):
-    time.sleep(1)
     while monster1.monster_health > 0 and player1.hp > 0:
         print(f'''
 ________________________________________________________
