@@ -2,7 +2,21 @@ import random as rand
 import time
 import sys
 
+def save_data(data):
+    file = open('data.txt', 'w')
+    file.write(str(data.hp) + '\n')
+    file.write(str(data.strength) + '\n')
+    file.write(str(data.level) + '\n')
+    file.write(str(data.xp) + '\n')
+    file.write(str(data.name) + '\n')
+    file.close()
 
+def load_data():
+    ret_data = []
+    with open('data.txt', 'r') as file:
+        for line in file:
+            ret_data.append(line)
+    return ret_data
 
 def print_slow(string, tim):
     for letter in string:
@@ -65,6 +79,9 @@ def display_stats(player1):
 |  _______________________  |
  \ |                     | / """)              
     print_slow(f"""
+         Name: {(player1.name)}
+""", 0.03)                         
+    print_slow(f"""
          Health: {int(player1.hp)}
 """, 0.03)                         
     print_slow(f"""
@@ -81,31 +98,46 @@ _/ |_____________________| \_
 |___________________________|""")
 
 def intro(player1):
-    player1.name = str(input("""
+    game = input("""
+1. Load game 2. new game """)
+    if game == "1":
+        data = load_data ()
+        player1.hp = float(data[0].strip ("\n"))
+        player1.strength = float(data[1].strip ("\n"))
+        player1.level = int(data[2].strip ("\n"))
+        player1.xp = int(data[3].strip ("\n"))
+        player1.name = data[4].strip ("\n")
+        print_slow("Loading", 0.04)
+        print_slow("...", 0.8)
+        time.sleep(0.5)
+    elif game == "2":
+        player1.name = str(input("""
                     What is your name, adventurer?: """))
     
-    print_slow(f"""
-  _____________________________________          
- / \                                   \.
-| O | In the forsaken realm of Eldrath, |.
- \_ | A once-prosperous kingdom,        |.
-    | Now teeters on the edge,          |.
-    | Of darkness.                      |.
-    |                                   |.
-    | A sinister portal has unleashed,  |.
-    | A horde of nightmarish monsters,  |.
-    | Terrorizing the land and          |.
-    | Plunging it into chaos.           |.
-    |                                   |.
-    | Will you rise as the hero,        |.
-    | Eldrath needs, only YOU can       |.
-    | decide the kingdom's ultimate     |.
-    | Destiny, We believe in you Hero!  |.
-    |   ________________________________|___
-    |  /      Sincerely, King Fabian VI    /.
-    \_/___________________________________/.
-""", 0.004)
-    input("Press Enter To Continue")
+        print_slow(f"""
+        _____________________________________          
+        / \                                   \.
+        | O | In the forsaken realm of Eldrath, |.
+        \_ | A once-prosperous kingdom,        |.
+            | Now teeters on the edge,          |.
+            | Of darkness.                      |.
+            |                                   |.
+            | A sinister portal has unleashed,  |.
+            | A horde of nightmarish monsters,  |.
+            | Terrorizing the land and          |.
+            | Plunging it into chaos.           |.
+            |                                   |.
+            | Will you rise as the hero,        |.
+            | Eldrath needs, only YOU can       |.
+            | decide the kingdom's ultimate     |.
+            | Destiny, We believe in you Hero!  |.
+            |   ________________________________|___
+            |  /      Sincerely, King Fabian VI    /.
+            \_/___________________________________/.
+        """, 0.004)
+        input("Press Enter To Continue")
+    else:
+        print("Choose 1 or 2")
 
 def backpack(pack):
     if not pack:
@@ -195,8 +227,8 @@ Inventory: {pack}""")
 You do not have any health potions
                        ''')
 
-def travel(player1, trap, pack, monster1):
-    departure = rand.randint(1, 3)
+def travel(player1, trap, pack, monster1, ):
+    departure = rand.randint(2, 2)
     chestitems = Items()
     if departure == 1:
         print(rand.choice([f"""
@@ -392,9 +424,9 @@ def travel(player1, trap, pack, monster1):
 ''')
         battle(monster1, player1, pack)
     elif departure == 2:
-        print("""
+        if len(pack) < 3:
+            print("""
 You found a chest!""")
-        if len(pack) < 5:
             print(f"""
 You got a new {chestitems.name}""")
             pack.append(chestitems.name) 
@@ -407,9 +439,23 @@ Your strength increased by {round(chestitems.strength_bonus, 2) * 100}%""")
                 print(f"""
 Your health increased by {round(chestitems.hp_bonus, 2) * 100}%""")
         else:
-            print("""
-Your backpack is full. You cannot carry more items.
-                  """)
+            print(f"{backpack(pack)}")
+            remove_weapon = int(input("Enter the number of the weapon you wish to remove: ")) - 1
+            if remove_weapon < len(pack):
+                removed_item = pack.pop(remove_weapon)
+                if removed_item == "longbow" or removed_item == "iron sword":
+                    decrease_percentage = 1 - chestitems.strength_bonus
+                    player1.strength *= decrease_percentage
+                    print(f"Your strength decreased by {round(chestitems.strength_bonus * 100)}%")
+                elif removed_item == "iron armor" or removed_item == "iron shield":
+                    decrease_percentage = 1 - chestitems.hp_bonus
+                    player1.hp *= decrease_percentage
+                    print(f"Your health decreased by {round(chestitems.hp_bonus * 100)}%")
+                else:
+                    print("Invalid item index!")
+
+
+            
     elif departure == 3:
         right_answer = "1"
         print(f"""
@@ -446,7 +492,8 @@ def menu(player1, monster1):
         print_slow("""
         1.  Explore 
         2.  Stats 
-        3.  Backpack 
+        3.  Backpack
+        4.  Save
 
         Please Enter Your Choice: """, 0.02)
         camp = input ('')
@@ -457,6 +504,13 @@ def menu(player1, monster1):
             display_stats(player1)
         elif camp == "3":
             print(backpack(pack))
+        elif camp == "4":
+            save_data (player1)
+            print_slow("Saving game", 0.04)
+            print_slow("...", 0.8) 
+            time.sleep(0.5)
+        else:
+            print ('Choose 1, 2, 3 or 4!')
     if player1.hp < 0:
         print("""
 You got killed, better luck next time.
