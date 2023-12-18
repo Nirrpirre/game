@@ -148,7 +148,7 @@ def backpack(pack):
 Your backpack is empty"""
     else:
         return pack
-#
+
 def level_up(player1):
     xp_required = player1.level * 10
     if player1.xp >= xp_required:
