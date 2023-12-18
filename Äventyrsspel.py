@@ -161,7 +161,7 @@ def level_up(player1):
 def battle(monster1, player1, pack):
     while monster1.monster_health > 0 and player1.hp > 0:
         print(f'''
-________________________________________________________
+_____________________________________________________
             
 --{monster1.monster}--
 {monster1.monster} Strength: {int(monster1.monster_strength)}
@@ -235,7 +235,7 @@ def travel(player1, trap, pack, monster1):
     response2 = ""
     while response2 != door1 or door2 or door3:
         print("""
-________________________________________________________
+_____________________________________________________
               
   .-----.-----.     .-----.-----.     .-----.-----.     
 :|      |      |: :|      |      |: :|      |      |:
