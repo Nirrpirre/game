@@ -2,6 +2,7 @@ import random as rand
 import time
 import sys
 #segho
+#ioehsohef
 def save_data(data):
     file = open('data.txt', 'w')
     file.write(str(data.hp) + '\n')
