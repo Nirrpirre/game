@@ -172,16 +172,20 @@ def level_up(player1):
         
 def battle(monster1, player1, pack):
     while monster1.monster_health > 0 and player1.hp > 0:
+        monster1.monster_strength = round(monster1.monster_strength)
+        monster1.monster_health = round(monster1.monster_health)
+        player1.strength = round(player1.strength)
+        player1.hp = round(player1.hp)
         print(f'''
 _____________________________________________________
             
 --{monster1.monster}--
-{monster1.monster} Strength: {int(monster1.monster_strength)}
-{monster1.monster} Health:   {int(monster1.monster_health)}
+{monster1.monster} Strength: {monster1.monster_strength}
+{monster1.monster} Health:   {monster1.monster_health}
 
 --{player1.name}--
-{player1.name}  Strenght: {int(player1.strength)}
-{player1.name}  Health:   {int(player1.hp)}    
+{player1.name}  Strenght: {player1.strength}
+{player1.name}  Health:   {player1.hp}    
 ''')
         print (f"{player1.name}'s turn")
         print_slow("""
@@ -195,7 +199,7 @@ _____________________________________________________
             time.sleep(1)
             monster1.monster_health -= player1.strength
             if monster1.monster_health <= 0:
-                monster1.monster_health == 0
+                monster1.monster_health = 0
             print_slow(f"""
 {player1.name} did {int(player1.strength)} damage
 The {monster1.monster} has {monster1.monster_health} health left
