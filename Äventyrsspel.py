@@ -110,21 +110,26 @@ _/ |_____________________| \_
 
 
 def intro(player1):
-    game = input("""
+    while True:
+        game = input("""
 1. Load game 2. new game """)
-    if game == "1":
-        data = load_data ()
-        player1.hp = float(data[0].strip ("\n"))
-        player1.strength = float(data[1].strip ("\n"))
-        player1.level = int(data[2].strip ("\n"))
-        player1.xp = int(data[3].strip ("\n"))
-        player1.name = data[4].strip ("\n")
-        print_slow("Loading", 0.04)
-        print_slow("...", 0.8)
-        time.sleep(0.5)
-    elif game == "2":
-        player1.name = str(input("""
-                    What is your name, adventurer?: """))
+        if game == "1":
+            data = load_data ()
+            player1.hp = float(data[0].strip ("\n"))
+            player1.strength = float(data[1].strip ("\n"))
+            player1.level = int(data[2].strip ("\n"))
+            player1.xp = int(data[3].strip ("\n"))
+            player1.name = data[4].strip ("\n")
+            print_slow("Loading", 0.04)
+            print_slow("...", 0.8)
+            time.sleep(0.5)
+            break
+        elif game == "2":
+            player1.name = str(input("""
+What is your name, adventurer?: """))
+            break
+        else: print ("Choose 1, 2")
+
     
     print_slow(f"""
   _____________________________________          
@@ -234,7 +239,7 @@ You do not have any health potions
                        ''')
 
 def travel(player1, trap, pack, monster1, ):
-    departure = rand.randint(2, 2)
+    departure = rand.randint(1, 3)
     chestitems = Items()
     door1 = "left"
     door2 = "middle"
