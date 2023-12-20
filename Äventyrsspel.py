@@ -122,7 +122,39 @@ def intro(player1):
         time.sleep(0.5)
     elif game == "2":
         player1.name = str(input("""
-                    What is your name, adventurer?: """))
+--?-- What is your name, adventurer?: """))
+    
+        print_slow(f"""
+--?-- So {player1.name}, what could an adventurer like you be doing In Eldrath with all these
+      monsters roaming around?
+""", 0.04)
+        answer1 = "1"
+        answer2 = "2"
+        answer3 = "3"
+        response1 = ""
+        while response1 != answer1 or answer2 or answer3:
+            print("""
+1. I'm just passing through
+2. The kingdom needs my help to survive!
+3. Say nothing""")
+            response1 = str(input(""))
+            if response1 == "1":
+                print_slow("""
+--?-- I understand, but before you go on with your adventure 
+      you need to read this letter from the king""", 0.04)
+                break
+            if response1 == "2":
+                print_slow("""
+--?-- You are brave and noble, read this letter from the king
+      to continue your journey""", 0.04)
+                break
+            if response1 == "3":
+                print_slow("""
+*You decide not to say anything and continue on your journey.*
+*Suddenly a small letter falls from the sky and lands in your hands,*
+
+It reads:""", 0.04)
+                break
     
     print_slow(f"""
   _____________________________________          
@@ -231,8 +263,8 @@ Inventory: {pack}""")
 You do not have any health potions
                        ''')
 
-def travel(player1, trap, pack, monster1, ):
-    departure = rand.randint(2, 2)
+def travel(player1, trap, pack, monster1):
+    departure = rand.randint(1, 3)
     chestitems = Items()
     door1 = "left"
     door2 = "middle"
@@ -410,52 +442,7 @@ Your strength increased by {round(chestitems.strength_bonus, 2) * 100}%""")
                 print(f"""
 Your health increased by {round(chestitems.hp_bonus, 2) * 100}%""")
         else:
-            print(f"""
-You would have gotten a {chestitems.name},
-But your backpack is full. 
-""")
-            response3 = ""
-            while response3 != "1" or "2":
-                print(f"""
-Would you like to delete an item to carry the {chestitems.name}?
-1. Yes
-2. No
-""")
-                response3 = input("")
-                if response3 == "1":
-                    response4 = ""
-                    while response4 != "1" or "2" or "3" or "4" or "5":
-                        print("What item would you like to delete?")
-                        response4 = input(f"\n{pack}\n\nEnter the number of the item you want to delete: ")
-                        if response4 == "1" or "2" or "3" or "4" or "5":
-                            if response4 == "1":
-                                response4 = 1
-                            if response4 == "2":
-                                response4 = 2
-                            if response4 == "3":
-                                response4 = 3
-                            if response4 == "4":
-                                response4 = 4
-                            if response4 == "5":
-                                response4 = 5
-                            pack.pop(response4-1)
-                            print(f"You deleted an item and you now have a {chestitems.name}")
-                            print(f"""
-You got a new {chestitems.name}!""")
-                            pack.append(chestitems.name) 
-                            if chestitems.name == "longbow" or chestitems.name == "iron sword":
-                                player1.strength *= (chestitems.strength_bonus + 1)
-                                print(f"\nYour strength increased by {round(chestitems.strength_bonus, 2) * 100}%")
-                            elif chestitems.name == "iron armor" or chestitems.name == "iron shield":
-                                player1.hp *= (chestitems.hp_bonus + 1)
-                                print(f"\nYour health increased by {round(chestitems.hp_bonus, 2) * 100}%")
-                        break
-                    break
-                if response3 == "2":
-                    print("You did not delete an item")
-                    break
-                    
-            
+            removeitem(player1, pack, chestitems)            
     elif departure == 3:
         print(f"""
         You encountered a {trap.trap_name}""")
@@ -470,7 +457,60 @@ You got a new {chestitems.name}!""")
         elif player_answer != trap.right_answer:
             trap.trigger(player1)
 
-
+def removeitem(player1, pack, chestitems):
+    print(f"""
+You would have gotten a {chestitems.name},
+But your backpack is full. 
+""")
+    response3 = ""
+    while response3 != "1" or "2":
+                print(f"""
+Would you like to delete an item to carry the {chestitems.name}?
+1. Yes
+2. No
+""")
+                response3 = input("")
+                if response3 == "1":
+                    response4 = ""
+                    while response4 != 1 or response4 != 2 or response4 != 3 or response4 != 4 or response4 != 5:
+                        try:
+                            print("What item would you like to delete?")
+                            response4 = int(input(f"\n{pack}\n\nEnter the number of the item you want to delete: "))
+                            if response4 == 1 or response4 == 2 or response4 == 3 or response4 == 4 or response4 == 5:
+                                pack.pop(response4-1)
+                                if chestitems.name == "longbow" or chestitems.name == "iron sword":
+                                    decrease_percentage = 1 - chestitems.strength_bonus
+                                    player1.strength *= decrease_percentage
+                                    print(f"Your strength decreased by {round(chestitems.strength_bonus) * 100}%")
+                                    print(f"You deleted an item and you now have a {chestitems.name}")
+                                    print(f"""
+        You got a new {chestitems.name}!""")
+                                elif chestitems.name == "iron armor" or chestitems.name == "iron shield":
+                                    decrease_percentage = 1 - chestitems.hp_bonus
+                                    player1.hp *= decrease_percentage
+                                    print(f"Your health decreased by {round(chestitems.hp_bonus) * 100}%")
+                                print(f"You deleted an item and you now have a {chestitems.name}")
+                                print(f"""
+        You got a new {chestitems.name}!""")
+                                if chestitems.name == "longbow" or chestitems.name == "iron sword":
+                                    player1.strength *= (chestitems.strength_bonus + 1)
+                                    print(f"\nYour strength increased by {round(chestitems.strength_bonus, 2) * 100}%")
+                                    pack.append(chestitems.name) 
+                                elif chestitems.name == "iron armor" or chestitems.name == "iron shield":
+                                    player1.hp *= (chestitems.hp_bonus + 1)
+                                    print(f"\nYour health increased by {round(chestitems.hp_bonus, 2) * 100}%")
+                                    pack.append(chestitems.name) 
+                                break
+                            else:
+                                print ('Enter a number between 1-5')
+                                continue
+                        except ValueError:
+                            print ('Enter a valid number')
+                            continue
+                if response3 == "2":
+                    print("You did not delete an item")
+                    break
+                break     
 
 def menu(player1, monster1):
     print_slow("""                         
