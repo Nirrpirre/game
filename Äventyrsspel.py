@@ -68,6 +68,8 @@ class Trap:
 class Items:
     def __init__(self):
         self.name = rand.choice(["longbow", "iron sword", "iron armor", "iron shield", "Health potion"])
+        self.hp_bonus = 0
+        self.strength_bonus = 0
         if self.name == "longbow" or self.name == "iron sword":
             self.strength_bonus = rand.uniform(0.1, 0.2)
         elif self.name == "Health potion":
@@ -414,46 +416,20 @@ Your health increased by {round(chestitems.hp_bonus, 2) * 100}%""")
 You would have gotten a {chestitems.name},
 But your backpack is full. 
 """)
-            response3 = ""
-            while response3 != "1" or "2":
-                print(f"""
-Would you like to delete an item to carry the {chestitems.name}?
-1. Yes
-2. No
-""")
-                response3 = input("")
-                if response3 == "1":
-                    response4 = ""
-                    while response4 != "1" or "2" or "3" or "4" or "5":
-                        print("What item would you like to delete?")
-                        response4 = input(f"\n{pack}\n\nEnter the number of the item you want to delete: ")
-                        if response4 == "1" or "2" or "3" or "4" or "5":
-                            if response4 == "1":
-                                response4 = 1
-                            if response4 == "2":
-                                response4 = 2
-                            if response4 == "3":
-                                response4 = 3
-                            if response4 == "4":
-                                response4 = 4
-                            if response4 == "5":
-                                response4 = 5
-                            pack.pop(response4-1)
-                            print(f"You deleted an item and you now have a {chestitems.name}")
-                            print(f"""
-You got a new {chestitems.name}!""")
-                            pack.append(chestitems.name) 
-                            if chestitems.name == "longbow" or chestitems.name == "iron sword":
-                                player1.strength *= (chestitems.strength_bonus + 1)
-                                print(f"\nYour strength increased by {round(chestitems.strength_bonus, 2) * 100}%")
-                            elif chestitems.name == "iron armor" or chestitems.name == "iron shield":
-                                player1.hp *= (chestitems.hp_bonus + 1)
-                                print(f"\nYour health increased by {round(chestitems.hp_bonus, 2) * 100}%")
-                        break
-                    break
-                if response3 == "2":
-                    print("You did not delete an item")
-                    break
+            print(f"{backpack(pack)}")
+            remove_weapon = int(input("Enter the number of the weapon you wish to remove: ")) - 1
+            if remove_weapon < len(pack):
+                removed_item = pack.pop(remove_weapon)
+                if removed_item == "longbow" or removed_item == "iron sword":
+                    decrease_percentage = 1 - chestitems.strength_bonus
+                    player1.strength *= decrease_percentage
+                    print(f"Your strength decreased by {round(chestitems.strength_bonus * 100)}%")
+                elif removed_item == "iron armor" or removed_item == "iron shield":
+                    decrease_percentage = 1 - chestitems.hp_bonus
+                    player1.hp *= decrease_percentage
+                    print(f"Your health decreased by {round(chestitems.hp_bonus * 100)}%")
+                else:
+                    print("Invalid item index!")
                     
             
     elif departure == 3:
