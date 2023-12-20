@@ -1,8 +1,7 @@
 import random as rand
 import time
 import sys
-#segho
-#ioehsohef
+
 def save_data(data):
     file = open('data.txt', 'w')
     file.write(str(data.hp) + '\n')
@@ -68,6 +67,8 @@ class Trap:
 class Items:
     def __init__(self):
         self.name = rand.choice(["longbow", "iron sword", "iron armor", "iron shield", "Health potion"])
+        self.hp_bonus = 0
+        self.strength_bonus = 0
         if self.name == "longbow" or self.name == "iron sword":
             self.strength_bonus = rand.uniform(0.1, 0.2)
         elif self.name == "Health potion":
@@ -105,26 +106,59 @@ def display_stats(player1):
 _/ |_____________________| \_
 |___________________________|""")
     
-
-
 def intro(player1):
-    game = input("""
+    while True:
+        game = input("""
 1. Load game 2. new game """)
-    if game == "1":
-        data = load_data ()
-        player1.hp = float(data[0].strip ("\n"))
-        player1.strength = float(data[1].strip ("\n"))
-        player1.level = int(data[2].strip ("\n"))
-        player1.xp = int(data[3].strip ("\n"))
-        player1.name = data[4].strip ("\n")
-        print_slow("Loading", 0.04)
-        print_slow("...", 0.8)
-        time.sleep(0.5)
-    elif game == "2":
-        player1.name = str(input("""
-                    What is your name, adventurer?: """))
+        if game == "1":
+            data = load_data ()
+            player1.hp = float(data[0].strip ("\n"))
+            player1.strength = float(data[1].strip ("\n"))
+            player1.level = int(data[2].strip ("\n"))
+            player1.xp = int(data[3].strip ("\n"))
+            player1.name = data[4].strip ("\n")
+            print_slow("Loading", 0.04)
+            print_slow("...", 0.8)
+            time.sleep(0.5)
+            break
+        elif game == "2":
+            player1.name = str(input("""
+--?-- What is your name, adventurer?: """))
     
-    print_slow(f"""
+        print_slow(f"""
+--?-- So {player1.name}, what could an adventurer like you be doing In Eldrath with all these
+      monsters roaming around?
+""", 0.04)
+        answer1 = "1"
+        answer2 = "2"
+        answer3 = "3"
+        response1 = ""
+        while response1 != answer1 or answer2 or answer3:
+            print("""
+1. I'm just passing through
+2. The kingdom needs my help to survive!
+3. Say nothing""")
+            response1 = str(input(""))
+            if response1 == "1":
+                print_slow("""
+--?-- I understand, but before you go on with your adventure 
+      you need to read this letter from the king""", 0.04)
+                break
+            if response1 == "2":
+                print_slow("""
+--?-- You are brave and noble, read this letter from the king
+      to continue your journey""", 0.04)
+                break
+            if response1 == "3":
+                print_slow("""
+*You decide not to say anything and continue on your journey.*
+*Suddenly a small letter falls from the sky and lands in your hands,*
+
+It reads:""", 0.04)
+                break
+
+    
+        print_slow(f"""
   _____________________________________          
  / \                                   \.
 | O | In the forsaken realm of Eldrath, |.
@@ -145,6 +179,7 @@ def intro(player1):
     |  /      Sincerely, King Fabian VI    /.
     \_/___________________________________/.
 """, 0.004)
+        break
     input("Press Enter To Continue")
 
 def backpack(pack):
@@ -165,16 +200,20 @@ def level_up(player1):
         
 def battle(monster1, player1, pack):
     while monster1.monster_health > 0 and player1.hp > 0:
+        monster1.monster_strength = round(monster1.monster_strength)
+        monster1.monster_health = round(monster1.monster_health)
+        player1.strength = round(player1.strength)
+        player1.hp = round(player1.hp)
         print(f'''
 _____________________________________________________
             
 --{monster1.monster}--
-{monster1.monster} Strength: {int(monster1.monster_strength)}
-{monster1.monster} Health:   {int(monster1.monster_health)}
+{monster1.monster} Strength: {monster1.monster_strength}
+{monster1.monster} Health:   {monster1.monster_health}
 
 --{player1.name}--
-{player1.name}  Strenght: {int(player1.strength)}
-{player1.name}  Health:   {int(player1.hp)}    
+{player1.name}  Strenght: {player1.strength}
+{player1.name}  Health:   {player1.hp}    
 ''')
         print (f"{player1.name}'s turn")
         print_slow("""
@@ -188,7 +227,7 @@ _____________________________________________________
             time.sleep(1)
             monster1.monster_health -= player1.strength
             if monster1.monster_health <= 0:
-                monster1.monster_health == 0
+                monster1.monster_health = 0
             print_slow(f"""
 {player1.name} did {int(player1.strength)} damage
 The {monster1.monster} has {monster1.monster_health} health left
@@ -414,47 +453,23 @@ Your health increased by {round(chestitems.hp_bonus, 2) * 100}%""")
 You would have gotten a {chestitems.name},
 But your backpack is full. 
 """)
-            response3 = ""
-            while response3 != "1" or "2":
-                print(f"""
-Would you like to delete an item to carry the {chestitems.name}?
-1. Yes
-2. No
-""")
-                response3 = input("")
-                if response3 == "1":
-                    response4 = ""
-                    while response4 != "1" or "2" or "3" or "4" or "5":
-                        print("What item would you like to delete?")
-                        response4 = input(f"\n{pack}\n\nEnter the number of the item you want to delete: ")
-                        if response4 == "1" or "2" or "3" or "4" or "5":
-                            if response4 == "1":
-                                response4 = 1
-                            if response4 == "2":
-                                response4 = 2
-                            if response4 == "3":
-                                response4 = 3
-                            if response4 == "4":
-                                response4 = 4
-                            if response4 == "5":
-                                response4 = 5
-                            pack.pop(response4-1)
-                            print(f"You deleted an item and you now have a {chestitems.name}")
-                            print(f"""
-You got a new {chestitems.name}!""")
-                            pack.append(chestitems.name) 
-                            if chestitems.name == "longbow" or chestitems.name == "iron sword":
-                                player1.strength *= (chestitems.strength_bonus + 1)
-                                print(f"\nYour strength increased by {round(chestitems.strength_bonus, 2) * 100}%")
-                            elif chestitems.name == "iron armor" or chestitems.name == "iron shield":
-                                player1.hp *= (chestitems.hp_bonus + 1)
-                                print(f"\nYour health increased by {round(chestitems.hp_bonus, 2) * 100}%")
-                        break
-                    break
-                if response3 == "2":
-                    print("You did not delete an item")
-                    break
-                    
+            print(f"{backpack(pack)}")
+            remove_weapon = int(input("Enter the number of the weapon you wish to remove: ")) - 1
+            if remove_weapon < len(pack):
+                removed_item = pack.pop(remove_weapon)
+                print(f"You deleted the {removed_item}")
+                if removed_item == "longbow" or removed_item == "iron sword":
+                    decrease_percentage = 1 - chestitems.strength_bonus
+                    player1.strength *= decrease_percentage
+                    print(f"Your strength decreased by {round(chestitems.strength_bonus * 100)}%")
+                elif removed_item == "iron armor" or removed_item == "iron shield":
+                    decrease_percentage = 1 - chestitems.hp_bonus
+                    player1.hp *= decrease_percentage
+                    print(f"Your health decreased by {round(chestitems.hp_bonus * 100)}%")                    
+                else:
+                    print("Invalid item index!")
+                pack.append(chestitems.name)   
+                print(f"You now have a {chestitems.name}")
             
     elif departure == 3:
         print(f"""
