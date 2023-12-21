@@ -271,7 +271,7 @@ You do not have any health potions
                        ''')
 
 def travel(player1, trap, pack, monster1, ):
-    departure = rand.randint(2, 2)
+    departure = rand.randint(1, 3)
     chestitems = Items()
     door1 = "left"
     door2 = "middle"
